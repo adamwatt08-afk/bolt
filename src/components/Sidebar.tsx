@@ -72,13 +72,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   return (
     <aside className="bg-cegal-darker text-white w-64 min-h-screen border-r border-cegal-gray-700 flex flex-col">
       <div className="p-6 flex-1 overflow-y-auto">
-        <div className="mb-8 pb-6 border-b border-cegal-gray-600">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-cegal rounded-lg flex items-center justify-center shadow-cegal">
-              <span className="text-white font-bold text-lg">C</span>
-            </div>
-          </div>
-        </div>
 
         <nav className="space-y-6">
           {navigationSections.map((section, sectionIndex) => (
