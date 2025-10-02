@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import { Database, Calendar, Folder, HardDrive, BarChart3, RefreshCw, TrendingUp, Droplets, Gauge } from 'lucide-react';
+import { Database, Calendar, Folder, HardDrive, BarChart3, RefreshCw, TrendingUp, Droplets, Gauge, Search, Tag, Archive, Trash2, FolderOpen, Check } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 interface SimulationModel {
@@ -19,6 +19,8 @@ interface SimulationModel {
   recoveryFactor?: number;
   activeWells?: number;
   productionRate?: number;
+  tags?: string[];
+  archived?: boolean;
 }
 
 interface FieldStats {
@@ -39,6 +41,14 @@ interface ProductionData {
 
 const ReservoirSimulation: React.FC = () => {
   const [selectedField, setSelectedField] = useState('All');
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedModels, setSelectedModels] = useState<Set<string>>(new Set());
+  const [showTagInput, setShowTagInput] = useState<string | null>(null);
+  const [newTag, setNewTag] = useState('');
+  const [modelTags, setModelTags] = useState<{ [key: string]: string[] }>({});
+  const [archivedModels, setArchivedModels] = useState<Set<string>>(new Set());
+  const [showArchived, setShowArchived] = useState(false);
 
   const simulationModels: SimulationModel[] = [
     {
@@ -229,9 +239,80 @@ const ReservoirSimulation: React.FC = () => {
 
   const fields = ['All', ...Array.from(new Set(simulationModels.map(m => m.field)))];
 
-  const filteredModels = selectedField === 'All'
-    ? simulationModels
-    : simulationModels.filter(m => m.field === selectedField);
+  const toggleModelSelection = (modelId: string) => {
+    const newSelection = new Set(selectedModels);
+    if (newSelection.has(modelId)) {
+      newSelection.delete(modelId);
+    } else {
+      newSelection.add(modelId);
+    }
+    setSelectedModels(newSelection);
+  };
+
+  const selectAllModels = () => {
+    const allModelIds = simulationModels
+      .filter(m => !archivedModels.has(m.id))
+      .map(m => m.id);
+    setSelectedModels(new Set(allModelIds));
+  };
+
+  const deselectAllModels = () => {
+    setSelectedModels(new Set());
+  };
+
+  const addTag = (modelId: string, tag: string) => {
+    if (tag.trim()) {
+      setModelTags(prev => ({
+        ...prev,
+        [modelId]: [...(prev[modelId] || []), tag.trim()]
+      }));
+      setNewTag('');
+      setShowTagInput(null);
+    }
+  };
+
+  const removeTag = (modelId: string, tagToRemove: string) => {
+    setModelTags(prev => ({
+      ...prev,
+      [modelId]: (prev[modelId] || []).filter(t => t !== tagToRemove)
+    }));
+  };
+
+  const archiveSelected = () => {
+    const newArchived = new Set(archivedModels);
+    selectedModels.forEach(id => newArchived.add(id));
+    setArchivedModels(newArchived);
+    setSelectedModels(new Set());
+  };
+
+  const deleteSelected = () => {
+    if (window.confirm(`Delete ${selectedModels.size} selected model(s)?`)) {
+      setSelectedModels(new Set());
+    }
+  };
+
+  const filteredModels = simulationModels
+    .filter(m => {
+      if (!showArchived && archivedModels.has(m.id)) return false;
+      if (selectedField !== 'All' && m.field !== selectedField) return false;
+      if (searchQuery) {
+        const search = searchQuery.toLowerCase();
+        const matchesSearch =
+          m.field.toLowerCase().includes(search) ||
+          m.projectName.toLowerCase().includes(search) ||
+          m.classification.toLowerCase().includes(search) ||
+          m.modelPath.toLowerCase().includes(search) ||
+          (modelTags[m.id] || []).some(tag => tag.toLowerCase().includes(search));
+        if (!matchesSearch) return false;
+      }
+      return true;
+    });
+
+  const selectedModel = selectedModelId
+    ? simulationModels.find(m => m.id === selectedModelId)
+    : null;
+
+  const visualizationModels = selectedModel ? [selectedModel] : filteredModels;
 
   const getFieldStats = (): FieldStats[] => {
     const fieldMap = new Map<string, FieldStats>();
@@ -291,10 +372,243 @@ const ReservoirSimulation: React.FC = () => {
             <p className="text-sm text-cegal-gray-400">Reservoir simulation model management and tracking</p>
           </div>
         </div>
-        <button className="btn-cegal-secondary flex items-center gap-2">
-          <RefreshCw className="h-4 w-4" />
-          <span>Refresh</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowArchived(!showArchived)}
+            className={`btn-cegal-secondary flex items-center gap-2 ${showArchived ? 'bg-cegal-primary/20' : ''}`}
+          >
+            <Archive className="h-4 w-4" />
+            <span>{showArchived ? 'Hide' : 'Show'} Archived</span>
+          </button>
+          <button className="btn-cegal-secondary flex items-center gap-2">
+            <RefreshCw className="h-4 w-4" />
+            <span>Refresh</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-cegal-gray-400" />
+            <input
+              type="text"
+              placeholder="Search models by field, project, classification, path, or tags..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-cegal-gray-600 rounded-lg focus:ring-2 focus:ring-cegal-primary focus:border-transparent bg-cegal-dark text-white"
+            />
+          </div>
+          {selectedModels.size > 0 && (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-cegal-gray-400">{selectedModels.size} selected</span>
+              <button
+                onClick={archiveSelected}
+                className="btn-cegal-secondary flex items-center gap-2"
+              >
+                <Archive className="h-4 w-4" />
+                Archive
+              </button>
+              <button
+                onClick={deleteSelected}
+                className="btn-cegal-secondary flex items-center gap-2 hover:bg-red-500/20 hover:border-red-500"
+              >
+                <Trash2 className="h-4 w-4" />
+                Delete
+              </button>
+              <button
+                onClick={deselectAllModels}
+                className="btn-cegal-secondary"
+              >
+                Clear
+              </button>
+            </div>
+          )}
+          {selectedModels.size === 0 && (
+            <button
+              onClick={selectAllModels}
+              className="btn-cegal-secondary"
+            >
+              Select All
+            </button>
+          )}
+        </div>
+
+        <div className="max-h-96 overflow-y-auto">
+          <table className="w-full text-sm">
+            <thead className="sticky top-0 bg-cegal-darker z-10">
+              <tr className="border-b border-cegal-gray-700">
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">
+                  <input
+                    type="checkbox"
+                    checked={selectedModels.size === filteredModels.length && filteredModels.length > 0}
+                    onChange={(e) => e.target.checked ? selectAllModels() : deselectAllModels()}
+                    className="rounded border-cegal-gray-600"
+                  />
+                </th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Field</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Project Name</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Classification</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">STOIIP</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Recovery %</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Wells</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Tags</th>
+                <th className="text-left py-3 px-2 text-cegal-gray-400 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredModels.map(model => (
+                <tr
+                  key={model.id}
+                  className={`border-b border-cegal-gray-800 hover:bg-cegal-gray-800/30 cursor-pointer ${
+                    selectedModelId === model.id ? 'bg-cegal-primary/10' : ''
+                  } ${archivedModels.has(model.id) ? 'opacity-50' : ''}`}
+                  onClick={() => setSelectedModelId(selectedModelId === model.id ? null : model.id)}
+                >
+                  <td className="py-3 px-2" onClick={(e) => e.stopPropagation()}>
+                    <input
+                      type="checkbox"
+                      checked={selectedModels.has(model.id)}
+                      onChange={() => toggleModelSelection(model.id)}
+                      className="rounded border-cegal-gray-600"
+                    />
+                  </td>
+                  <td className="py-3 px-2">
+                    <span
+                      className="px-2 py-1 rounded text-xs font-medium"
+                      style={{ backgroundColor: `${getFieldColor(model.field)}20`, color: getFieldColor(model.field) }}
+                    >
+                      {model.field}
+                    </span>
+                  </td>
+                  <td className="py-3 px-2 text-white">{model.projectName}</td>
+                  <td className="py-3 px-2 text-cegal-gray-300 text-xs">{model.classification}</td>
+                  <td className="py-3 px-2 text-white">{model.stoiip?.toFixed(1)} MMbbl</td>
+                  <td className="py-3 px-2 text-white">{model.recoveryFactor?.toFixed(1)}%</td>
+                  <td className="py-3 px-2 text-white">{model.activeWells}</td>
+                  <td className="py-3 px-2" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      {(modelTags[model.id] || []).map(tag => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 bg-cegal-primary/20 text-cegal-primary rounded text-xs flex items-center gap-1"
+                        >
+                          {tag}
+                          <button
+                            onClick={() => removeTag(model.id, tag)}
+                            className="hover:text-red-400"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                      {showTagInput === model.id ? (
+                        <input
+                          type="text"
+                          value={newTag}
+                          onChange={(e) => setNewTag(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') addTag(model.id, newTag);
+                            if (e.key === 'Escape') setShowTagInput(null);
+                          }}
+                          onBlur={() => {
+                            if (newTag.trim()) addTag(model.id, newTag);
+                            setShowTagInput(null);
+                          }}
+                          placeholder="Tag name..."
+                          className="px-2 py-0.5 bg-cegal-dark border border-cegal-gray-600 rounded text-xs w-24"
+                          autoFocus
+                        />
+                      ) : (
+                        <button
+                          onClick={() => setShowTagInput(model.id)}
+                          className="p-1 hover:bg-cegal-gray-700 rounded"
+                        >
+                          <Tag className="h-3 w-3 text-cegal-gray-400" />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                  <td className="py-3 px-2" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-2">
+                      {archivedModels.has(model.id) ? (
+                        <button
+                          onClick={() => {
+                            const newArchived = new Set(archivedModels);
+                            newArchived.delete(model.id);
+                            setArchivedModels(newArchived);
+                          }}
+                          className="p-1 hover:bg-cegal-gray-700 rounded"
+                          title="Restore"
+                        >
+                          <FolderOpen className="h-4 w-4 text-cegal-gray-400" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            const newArchived = new Set(archivedModels);
+                            newArchived.add(model.id);
+                            setArchivedModels(newArchived);
+                          }}
+                          className="p-1 hover:bg-cegal-gray-700 rounded"
+                          title="Archive"
+                        >
+                          <Archive className="h-4 w-4 text-cegal-gray-400" />
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          if (window.confirm(`Delete model ${model.projectName}?`)) {
+                            console.log('Delete model:', model.id);
+                          }
+                        }}
+                        className="p-1 hover:bg-red-500/20 rounded"
+                        title="Delete"
+                      >
+                        <Trash2 className="h-4 w-4 text-cegal-gray-400 hover:text-red-400" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {selectedModelId && selectedModel && (
+          <div className="mt-4 p-4 bg-cegal-dark border border-cegal-primary/30 rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-sm font-semibold text-white flex items-center gap-2">
+                <Check className="h-4 w-4 text-cegal-primary" />
+                Selected Model: {selectedModel.projectName}
+              </h4>
+              <button
+                onClick={() => setSelectedModelId(null)}
+                className="text-cegal-gray-400 hover:text-white"
+              >
+                Clear Selection
+              </button>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+              <div>
+                <span className="text-cegal-gray-400">Field:</span>
+                <span className="ml-2 text-white">{selectedModel.field}</span>
+              </div>
+              <div>
+                <span className="text-cegal-gray-400">GIIP:</span>
+                <span className="ml-2 text-white">{selectedModel.giip?.toFixed(1)} BCF</span>
+              </div>
+              <div>
+                <span className="text-cegal-gray-400">STOIIP:</span>
+                <span className="ml-2 text-white">{selectedModel.stoiip?.toFixed(1)} MMbbl</span>
+              </div>
+              <div>
+                <span className="text-cegal-gray-400">Production Rate:</span>
+                <span className="ml-2 text-white">{selectedModel.productionRate?.toLocaleString()} bbl/d</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -462,19 +776,32 @@ const ReservoirSimulation: React.FC = () => {
       </div>
 
       <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <TrendingUp className="h-6 w-6 text-cegal-primary" />
-          <h3 className="text-xl font-bold text-white">Reservoir Parameters & Production Analytics</h3>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="h-6 w-6 text-cegal-primary" />
+            <h3 className="text-xl font-bold text-white">
+              Reservoir Parameters & Production Analytics
+              {selectedModelId && <span className="text-cegal-primary ml-2">(Selected Model)</span>}
+            </h3>
+          </div>
+          {selectedModelId && (
+            <button
+              onClick={() => setSelectedModelId(null)}
+              className="text-sm text-cegal-gray-400 hover:text-white"
+            >
+              View All Models
+            </button>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-500/20 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
               <Droplets className="h-5 w-5 text-emerald-400" />
-              <span className="text-sm text-cegal-gray-400">Total GIIP</span>
+              <span className="text-sm text-cegal-gray-400">{selectedModelId ? 'GIIP' : 'Total GIIP'}</span>
             </div>
             <div className="text-2xl font-bold text-white">
-              {filteredModels.reduce((sum, m) => sum + (m.giip || 0), 0).toFixed(1)}
+              {visualizationModels.reduce((sum, m) => sum + (m.giip || 0), 0).toFixed(1)}
               <span className="text-sm text-cegal-gray-400 ml-2">BCF</span>
             </div>
           </div>
@@ -482,10 +809,10 @@ const ReservoirSimulation: React.FC = () => {
           <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
               <Database className="h-5 w-5 text-blue-400" />
-              <span className="text-sm text-cegal-gray-400">Total STOIIP</span>
+              <span className="text-sm text-cegal-gray-400">{selectedModelId ? 'STOIIP' : 'Total STOIIP'}</span>
             </div>
             <div className="text-2xl font-bold text-white">
-              {filteredModels.reduce((sum, m) => sum + (m.stoiip || 0), 0).toFixed(1)}
+              {visualizationModels.reduce((sum, m) => sum + (m.stoiip || 0), 0).toFixed(1)}
               <span className="text-sm text-cegal-gray-400 ml-2">MMbbl</span>
             </div>
           </div>
@@ -493,10 +820,12 @@ const ReservoirSimulation: React.FC = () => {
           <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 border border-amber-500/20 rounded-lg p-4">
             <div className="flex items-center gap-2 mb-2">
               <Gauge className="h-5 w-5 text-amber-400" />
-              <span className="text-sm text-cegal-gray-400">Avg Recovery Factor</span>
+              <span className="text-sm text-cegal-gray-400">{selectedModelId ? 'Recovery Factor' : 'Avg Recovery Factor'}</span>
             </div>
             <div className="text-2xl font-bold text-white">
-              {(filteredModels.reduce((sum, m) => sum + (m.recoveryFactor || 0), 0) / filteredModels.length).toFixed(1)}
+              {visualizationModels.length > 0
+                ? (visualizationModels.reduce((sum, m) => sum + (m.recoveryFactor || 0), 0) / visualizationModels.length).toFixed(1)
+                : '0.0'}
               <span className="text-sm text-cegal-gray-400 ml-2">%</span>
             </div>
           </div>
@@ -507,7 +836,7 @@ const ReservoirSimulation: React.FC = () => {
               <span className="text-sm text-cegal-gray-400">Active Wells</span>
             </div>
             <div className="text-2xl font-bold text-white">
-              {filteredModels.reduce((sum, m) => sum + (m.activeWells || 0), 0)}
+              {visualizationModels.reduce((sum, m) => sum + (m.activeWells || 0), 0)}
             </div>
           </div>
         </div>
@@ -516,8 +845,8 @@ const ReservoirSimulation: React.FC = () => {
           <div className="bg-cegal-dark rounded-lg p-5 border border-cegal-gray-700">
             <h4 className="text-sm font-semibold text-white mb-4">Production Rates by Field</h4>
             <div className="h-64">
-              {filteredModels.filter(m => m.productionRate).map((model, idx) => {
-                const maxRate = Math.max(...filteredModels.map(m => m.productionRate || 0));
+              {visualizationModels.filter(m => m.productionRate).map((model, idx) => {
+                const maxRate = Math.max(...visualizationModels.map(m => m.productionRate || 0));
                 const barWidth = ((model.productionRate || 0) / maxRate) * 100;
                 return (
                   <div key={model.id} className="mb-3">
@@ -543,8 +872,8 @@ const ReservoirSimulation: React.FC = () => {
           <div className="bg-cegal-dark rounded-lg p-5 border border-cegal-gray-700">
             <h4 className="text-sm font-semibold text-white mb-4">Recovery Factor Distribution</h4>
             <div className="h-64 flex items-end justify-between gap-2">
-              {filteredModels.filter(m => m.recoveryFactor).slice(0, 8).map((model, idx) => {
-                const maxRF = Math.max(...filteredModels.map(m => m.recoveryFactor || 0));
+              {visualizationModels.filter(m => m.recoveryFactor).slice(0, 8).map((model, idx) => {
+                const maxRF = Math.max(...visualizationModels.map(m => m.recoveryFactor || 0));
                 const barHeight = ((model.recoveryFactor || 0) / maxRF) * 100;
                 return (
                   <div key={model.id} className="flex-1 flex flex-col items-center">
@@ -695,9 +1024,9 @@ const ReservoirSimulation: React.FC = () => {
               <text x="250" y="285" fill="#9ca3af" fontSize="12" textAnchor="middle">STOIIP (MMbbl)</text>
               <text x="20" y="140" fill="#9ca3af" fontSize="12" textAnchor="middle" transform="rotate(-90 20 140)">Recovery Factor (%)</text>
 
-              {filteredModels.filter(m => m.stoiip && m.recoveryFactor).map((model, idx) => {
-                const maxSTOIIP = Math.max(...filteredModels.map(m => m.stoiip || 0));
-                const maxRF = Math.max(...filteredModels.map(m => m.recoveryFactor || 0));
+              {visualizationModels.filter(m => m.stoiip && m.recoveryFactor).map((model, idx) => {
+                const maxSTOIIP = Math.max(...visualizationModels.map(m => m.stoiip || 0));
+                const maxRF = Math.max(...visualizationModels.map(m => m.recoveryFactor || 0));
                 const x = 50 + ((model.stoiip || 0) / maxSTOIIP) * 420;
                 const y = 250 - ((model.recoveryFactor || 0) / maxRF) * 220;
 
@@ -706,7 +1035,7 @@ const ReservoirSimulation: React.FC = () => {
                     <circle
                       cx={x}
                       cy={y}
-                      r="8"
+                      r={selectedModelId ? "12" : "8"}
                       fill={getFieldColor(model.field)}
                       opacity="0.7"
                       className="hover:opacity-100 transition-opacity"
@@ -716,7 +1045,7 @@ const ReservoirSimulation: React.FC = () => {
               })}
             </svg>
             <div className="flex items-center justify-center gap-4 mt-2">
-              {Array.from(new Set(filteredModels.map(m => m.field))).map(field => (
+              {Array.from(new Set(visualizationModels.map(m => m.field))).map(field => (
                 <div key={field} className="flex items-center gap-2">
                   <div
                     className="w-3 h-3 rounded-full"
