@@ -837,9 +837,9 @@ const Overview: React.FC = () => {
       totalProjects: 8547,
       totalSize: '1.65 PB',
       activeUsers: 342,
-      duplicateGroups: 47,
-      duplicateSize: '412 TB',
-      duplicatePercentage: 24.9,
+      duplicateGroups: 2,
+      duplicateSize: '757 TB',
+      duplicatePercentage: 45.9,
       chartData: [
         { name: 'Jan 2024', value: 1247 },
         { name: 'Feb 2024', value: 1289 },
@@ -890,7 +890,7 @@ const Overview: React.FC = () => {
       totalProjects: 12834,
       totalSize: '820 TB',
       activeUsers: 218,
-      duplicateGroups: 134,
+      duplicateGroups: 1,
       duplicateSize: '189 TB',
       duplicatePercentage: 23.0,
       chartData: [
@@ -934,7 +934,7 @@ const Overview: React.FC = () => {
       totalProjects: 3567,
       totalSize: '589 TB',
       activeUsers: 156,
-      duplicateGroups: 28,
+      duplicateGroups: 1,
       duplicateSize: '156 TB',
       duplicatePercentage: 26.5,
       chartData: [
@@ -977,9 +977,9 @@ const Overview: React.FC = () => {
       totalProjects: 2189,
       totalSize: '364 TB',
       activeUsers: 94,
-      duplicateGroups: 12,
-      duplicateSize: '58 TB',
-      duplicatePercentage: 15.9,
+      duplicateGroups: 0,
+      duplicateSize: '0 TB',
+      duplicatePercentage: 0,
       chartData: [
         { name: 'Jan 2024', value: 234 },
         { name: 'Feb 2024', value: 245 },
@@ -1014,9 +1014,9 @@ const Overview: React.FC = () => {
     totalFiles: 47823,
     totalSize: '2.30 PB',
     activeUsers: 487,
-    duplicateGroups: 892,
-    duplicateSize: '634 TB',
-    duplicatePercentage: 27.6,
+    duplicateGroups: 2,
+    duplicateSize: '1.49 PB',
+    duplicatePercentage: 64.8,
     chartData: [
       { name: 'Jan 2024', value: 2567 },
       { name: 'Feb 2024', value: 2534 },
@@ -1068,9 +1068,9 @@ const Overview: React.FC = () => {
     totalFiles: 89456,
     totalSize: '1.07 PB',
     activeUsers: 623,
-    duplicateGroups: 1247,
-    duplicateSize: '267 TB',
-    duplicatePercentage: 24.9,
+    duplicateGroups: 2,
+    duplicateSize: '220 TB',
+    duplicatePercentage: 20.6,
     chartData: [
       { name: 'Jan 2024', value: 1134 },
       { name: 'Feb 2024', value: 1123 },
@@ -1184,7 +1184,7 @@ const Overview: React.FC = () => {
                     </div>
                   </div>
 
-                  {appData.duplicateGroups !== undefined && (
+                  {appData.duplicateGroups !== undefined && appData.duplicateGroups > 0 && (
                     <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
@@ -1194,13 +1194,28 @@ const Overview: React.FC = () => {
                           <div>
                             <p className="text-sm font-semibold text-white">Duplicate Data Detected</p>
                             <p className="text-xs text-cegal-gray-400 mt-1">
-                              {appData.duplicateGroups.toLocaleString()} duplicate groups found
+                              {appData.duplicateGroups.toLocaleString()} duplicate {appData.duplicateGroups === 1 ? 'group' : 'groups'} found
                             </p>
                           </div>
                         </div>
                         <div className="text-right">
                           <p className="text-lg font-bold text-yellow-500">{appData.duplicateSize}</p>
                           <p className="text-xs text-cegal-gray-400">{appData.duplicatePercentage}% of total</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {appData.duplicateGroups !== undefined && appData.duplicateGroups === 0 && (
+                    <div className="bg-green-900/20 border border-green-700/30 rounded-lg p-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-green-600/20 rounded-lg">
+                          <CheckCircle className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">No Duplicates Detected</p>
+                          <p className="text-xs text-cegal-gray-400 mt-1">
+                            All data is unique - no duplicate groups found
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1480,21 +1495,21 @@ const Overview: React.FC = () => {
                       <Copy className="h-4 w-4 text-yellow-500" />
                       <p className="text-xs font-medium text-yellow-500">Total Duplicate Groups</p>
                     </div>
-                    <p className="text-2xl font-bold text-white">2,360</p>
+                    <p className="text-2xl font-bold text-white">8</p>
                   </div>
                   <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <HardDrive className="h-4 w-4 text-yellow-500" />
                       <p className="text-xs font-medium text-yellow-500">Duplicate Storage</p>
                     </div>
-                    <p className="text-2xl font-bold text-white">1.72 PB</p>
+                    <p className="text-2xl font-bold text-white">2.81 PB</p>
                   </div>
                   <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <TrendingDown className="h-4 w-4 text-yellow-500" />
                       <p className="text-xs font-medium text-yellow-500">Potential Savings</p>
                     </div>
-                    <p className="text-2xl font-bold text-white">$428K</p>
+                    <p className="text-2xl font-bold text-white">$702K</p>
                     <p className="text-xs text-cegal-gray-400 mt-1">per month</p>
                   </div>
                   <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
@@ -1502,7 +1517,7 @@ const Overview: React.FC = () => {
                       <AlertTriangle className="h-4 w-4 text-yellow-500" />
                       <p className="text-xs font-medium text-yellow-500">Duplication Rate</p>
                     </div>
-                    <p className="text-2xl font-bold text-white">25.3%</p>
+                    <p className="text-2xl font-bold text-white">59.8%</p>
                     <p className="text-xs text-cegal-gray-400 mt-1">of total storage</p>
                   </div>
                 </div>
