@@ -46,6 +46,7 @@ interface DuplicateGroup {
 
 const Overview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'summary' | 'applications' | 'seismic' | 'wells' | 'analytics' | 'querying'>('summary');
+  const [applicationTab, setApplicationTab] = useState<'petrel' | 'techlog' | 'eclipse' | 'resinsight'>('petrel');
   const [expandedApp, setExpandedApp] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({});
@@ -1566,10 +1567,53 @@ const Overview: React.FC = () => {
 
         {activeTab === 'applications' && (
           <div className="space-y-6">
-            {renderApplicationDetails('petrel', applicationsData.petrel)}
-            {renderApplicationDetails('techlog', applicationsData.techlog)}
-            {renderApplicationDetails('eclipse', applicationsData.eclipse)}
-            {renderApplicationDetails('resinsight', applicationsData.resinsight)}
+            <div className="flex space-x-2 border-b border-cegal-gray-700">
+              <button
+                onClick={() => setApplicationTab('petrel')}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  applicationTab === 'petrel'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                Petrel
+              </button>
+              <button
+                onClick={() => setApplicationTab('techlog')}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  applicationTab === 'techlog'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                Techlog
+              </button>
+              <button
+                onClick={() => setApplicationTab('eclipse')}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  applicationTab === 'eclipse'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                Eclipse
+              </button>
+              <button
+                onClick={() => setApplicationTab('resinsight')}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  applicationTab === 'resinsight'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                ResInsight
+              </button>
+            </div>
+
+            {applicationTab === 'petrel' && renderApplicationDetails('petrel', applicationsData.petrel)}
+            {applicationTab === 'techlog' && renderApplicationDetails('techlog', applicationsData.techlog)}
+            {applicationTab === 'eclipse' && renderApplicationDetails('eclipse', applicationsData.eclipse)}
+            {applicationTab === 'resinsight' && renderApplicationDetails('resinsight', applicationsData.resinsight)}
 
             <div className="card-cegal bg-cegal-darker border-cegal-gray-700 p-6">
               <h3 className="text-lg font-semibold text-cegal-green mb-4">Data Management</h3>
