@@ -30,10 +30,15 @@ interface NavSection {
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const navigationSections: NavSection[] = [
     {
+      title: 'Command Centre',
+      items: [
+        { id: 'overview', label: 'Overview', icon: BarChart3 },
+      ]
+    },
+    {
       title: 'Core',
       items: [
         { id: 'setup', label: 'Setup', icon: Wrench },
-        { id: 'overview', label: 'Overview', icon: BarChart3 },
       ]
     },
     {
