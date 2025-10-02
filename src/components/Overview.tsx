@@ -56,7 +56,7 @@ const Overview: React.FC = () => {
       name: 'North_Sea_Legacy_2019.segy',
       path: '/seismic/archived/',
       extension: 'segy',
-      size: 1200000000000,
+      size: 198000000000000,
       lastAccess: new Date('2023-08-15'),
       lastModified: new Date('2023-08-10'),
       createDate: new Date('2019-03-15'),
@@ -66,7 +66,7 @@ const Overview: React.FC = () => {
       name: 'Training_Data_2020.las',
       path: '/wells/training/',
       extension: 'las',
-      size: 450000000000,
+      size: 87000000000000,
       lastAccess: new Date('2023-11-20'),
       lastModified: new Date('2023-11-15'),
       createDate: new Date('2020-05-22'),
@@ -76,7 +76,7 @@ const Overview: React.FC = () => {
       name: 'Backup_Petrel_Project.pet',
       path: '/projects/backups/',
       extension: 'pet',
-      size: 890000000000,
+      size: 412000000000000,
       lastAccess: new Date('2024-03-10'),
       lastModified: new Date('2024-03-08'),
       createDate: new Date('2023-01-20'),
@@ -86,7 +86,7 @@ const Overview: React.FC = () => {
       name: 'Corrupted_Survey_2023.sgy',
       path: '/seismic/processing/',
       extension: 'sgy',
-      size: 2300000000000,
+      size: 634000000000000,
       lastAccess: new Date('2024-01-05'),
       lastModified: new Date('2024-01-03'),
       createDate: new Date('2023-08-10'),
@@ -96,7 +96,7 @@ const Overview: React.FC = () => {
       name: 'Old_Simulation_2018.data',
       path: '/reservoir/legacy/',
       extension: 'data',
-      size: 680000000000,
+      size: 156000000000000,
       lastAccess: new Date('2023-09-22'),
       lastModified: new Date('2023-09-20'),
       createDate: new Date('2018-12-05'),
@@ -106,7 +106,7 @@ const Overview: React.FC = () => {
       name: 'North_Sea_Block_15-25_3D.segy',
       path: '/seismic/active/',
       extension: 'segy',
-      size: 8500000000000,
+      size: 856000000000000,
       lastAccess: new Date('2024-12-20'),
       lastModified: new Date('2024-12-18'),
       createDate: new Date('2024-06-10'),
@@ -116,7 +116,7 @@ const Overview: React.FC = () => {
       name: 'Johan_Sverdrup_4D_Baseline.sgy',
       path: '/seismic/active/',
       extension: 'sgy',
-      size: 6800000000000,
+      size: 712000000000000,
       lastAccess: new Date('2024-12-18'),
       lastModified: new Date('2024-12-15'),
       createDate: new Date('2024-04-22'),
@@ -126,7 +126,7 @@ const Overview: React.FC = () => {
       name: 'NS_15-25-A_Complete_Suite.las',
       path: '/wells/active/',
       extension: 'las',
-      size: 1200000000,
+      size: 123000000000000,
       lastAccess: new Date('2024-12-20'),
       lastModified: new Date('2024-12-19'),
       createDate: new Date('2024-11-05'),
@@ -136,7 +136,7 @@ const Overview: React.FC = () => {
       name: 'Johan_Sverdrup_P1_Logs.dlis',
       path: '/wells/active/',
       extension: 'dlis',
-      size: 980000000,
+      size: 108000000000000,
       lastAccess: new Date('2024-12-18'),
       lastModified: new Date('2024-12-17'),
       createDate: new Date('2024-10-12'),
@@ -146,10 +146,110 @@ const Overview: React.FC = () => {
       name: 'Johan_Sverdrup_Field_Model.ecl',
       path: '/reservoir/active/',
       extension: 'ecl',
-      size: 1400000000000,
+      size: 156000000000000,
       lastAccess: new Date('2024-12-20'),
       lastModified: new Date('2024-12-19'),
       createDate: new Date('2024-08-15'),
+      fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'GOM_Deepwater_3D_Final.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 634000000000000,
+      lastAccess: new Date('2024-12-15'),
+      lastModified: new Date('2024-12-12'),
+      createDate: new Date('2024-05-08'),
+      fileOwners: ['Processing Team']
+    },
+    {
+      name: 'Brazil_PreSalt_3D.sgy',
+      path: '/seismic/active/',
+      extension: 'sgy',
+      size: 689000000000000,
+      lastAccess: new Date('2024-12-08'),
+      lastModified: new Date('2024-12-05'),
+      createDate: new Date('2024-03-22'),
+      fileOwners: ['Geophysics Team']
+    },
+    {
+      name: 'West_Africa_PreSTM.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 523000000000000,
+      lastAccess: new Date('2024-12-10'),
+      lastModified: new Date('2024-12-07'),
+      createDate: new Date('2024-04-15'),
+      fileOwners: ['Processing Team', 'Geophysics Team']
+    },
+    {
+      name: 'Barents_Regional_2D.seg',
+      path: '/seismic/active/',
+      extension: 'seg',
+      size: 567000000000000,
+      lastAccess: new Date('2024-12-12'),
+      lastModified: new Date('2024-12-09'),
+      createDate: new Date('2024-02-18'),
+      fileOwners: ['Acquisition Team']
+    },
+    {
+      name: 'Permian_Horizontal_Well_H7.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 97000000000000,
+      lastAccess: new Date('2024-12-08'),
+      lastModified: new Date('2024-12-06'),
+      createDate: new Date('2024-09-20'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'Brazil_Lula_Production_23.dlis',
+      path: '/wells/active/',
+      extension: 'dlis',
+      size: 119000000000000,
+      lastAccess: new Date('2024-12-12'),
+      lastModified: new Date('2024-12-10'),
+      createDate: new Date('2024-08-05'),
+      fileOwners: ['Well Logging Team']
+    },
+    {
+      name: 'GOM_Thunder_Horse_A3.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 94000000000000,
+      lastAccess: new Date('2024-12-16'),
+      lastModified: new Date('2024-12-14'),
+      createDate: new Date('2024-10-01'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'Campos_Basin_Pre-Salt.pet',
+      path: '/projects/active/',
+      extension: 'pet',
+      size: 234000000000000,
+      lastAccess: new Date('2024-12-08'),
+      lastModified: new Date('2024-12-05'),
+      createDate: new Date('2024-07-12'),
+      fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'Lula_Field_Brazil.ecl',
+      path: '/reservoir/active/',
+      extension: 'ecl',
+      size: 134000000000000,
+      lastAccess: new Date('2024-12-17'),
+      lastModified: new Date('2024-12-16'),
+      createDate: new Date('2024-06-20'),
+      fileOwners: ['Production Team']
+    },
+    {
+      name: 'Thunder_Horse_GOM.ecl',
+      path: '/reservoir/active/',
+      extension: 'ecl',
+      size: 118000000000000,
+      lastAccess: new Date('2024-12-14'),
+      lastModified: new Date('2024-12-12'),
+      createDate: new Date('2024-05-30'),
       fileOwners: ['Reservoir Team']
     }
   ];
@@ -294,32 +394,32 @@ const Overview: React.FC = () => {
   const metrics = [
     {
       title: 'Total Data Assets',
-      value: '2,847',
-      change: '+12%',
+      value: '127,453',
+      change: '+18%',
       changeType: 'positive' as const,
       icon: Database,
       description: 'Active seismic, well & project data'
     },
     {
       title: 'Storage Used',
-      value: '47.3 TB',
-      change: '-8%',
+      value: '4.7 PB',
+      change: '-12%',
       changeType: 'negative' as const,
       icon: HardDrive,
       description: 'After recent optimization'
     },
     {
       title: 'Cost Savings',
-      value: '$127K',
-      change: '+23%',
+      value: '$2.4M',
+      change: '+31%',
       changeType: 'positive' as const,
       icon: TrendingDown,
       description: 'Monthly operational savings'
     },
     {
       title: 'Data Quality Score',
-      value: '87%',
-      change: '+5%',
+      value: '89%',
+      change: '+7%',
       changeType: 'positive' as const,
       icon: Activity,
       description: 'Overall data health index'
@@ -360,152 +460,152 @@ const Overview: React.FC = () => {
   const applicationsData = {
     petrel: {
       chartData: [
-        { name: 'Jan', value: 8.5 },
-        { name: 'Feb', value: 9.2 },
-        { name: 'Mar', value: 9.8 },
-        { name: 'Apr', value: 10.3 },
-        { name: 'May', value: 11.1 },
-        { name: 'Jun', value: 11.8 },
-        { name: 'Jul', value: 12.3 },
-        { name: 'Aug', value: 12.8 },
-        { name: 'Sep', value: 13.2 },
-        { name: 'Oct', value: 13.6 },
-        { name: 'Nov', value: 14.1 },
-        { name: 'Dec', value: 14.5 }
+        { name: 'Jan 2024', value: 1247 },
+        { name: 'Feb 2024', value: 1289 },
+        { name: 'Mar 2024', value: 1312 },
+        { name: 'Apr 2024', value: 1356 },
+        { name: 'May 2024', value: 1398 },
+        { name: 'Jun 2024', value: 1423 },
+        { name: 'Jul 2024', value: 1467 },
+        { name: 'Aug 2024', value: 1501 },
+        { name: 'Sep 2024', value: 1534 },
+        { name: 'Oct 2024', value: 1578 },
+        { name: 'Nov 2024', value: 1612 },
+        { name: 'Dec 2024', value: 1645 }
       ],
       added: [
-        { name: 'North Sea Interpretation 2024', size: '2.3 TB', lastModified: '2024-12-15', owner: 'Geophysics Team' },
-        { name: 'Gulf of Mexico 4D Analysis', size: '1.8 TB', lastModified: '2024-12-10', owner: 'Reservoir Team' },
-        { name: 'Barents Sea Prospects', size: '890 GB', lastModified: '2024-11-28', owner: 'Exploration Team' }
+        { name: 'North Sea Interpretation 2024', size: '247 TB', lastModified: '2024-12-15', owner: 'Geophysics Team' },
+        { name: 'Gulf of Mexico 4D Analysis', size: '189 TB', lastModified: '2024-12-10', owner: 'Reservoir Team' },
+        { name: 'Barents Sea Prospects', size: '156 TB', lastModified: '2024-11-28', owner: 'Exploration Team' }
       ],
       removed: [
-        { name: 'Legacy North Sea 2019', size: '1.2 TB', lastModified: '2024-12-01', owner: 'Archived' },
-        { name: 'Obsolete Training Projects', size: '450 GB', lastModified: '2024-11-15', owner: 'Archived' }
+        { name: 'Legacy North Sea 2019', size: '198 TB', lastModified: '2024-12-01', owner: 'Archived' },
+        { name: 'Obsolete Training Projects', size: '87 TB', lastModified: '2024-11-15', owner: 'Archived' }
       ],
       projects: [
-        { name: 'North Sea Block 15/25', size: '3.2 TB', lastModified: '2024-12-20', owner: 'Geophysics Team' },
-        { name: 'Johan Sverdrup Field', size: '2.8 TB', lastModified: '2024-12-18', owner: 'Reservoir Team' },
-        { name: 'Gulf of Mexico Deepwater', size: '2.1 TB', lastModified: '2024-12-15', owner: 'Exploration Team' },
-        { name: 'Barents Sea Regional', size: '1.9 TB', lastModified: '2024-12-12', owner: 'Geophysics Team' },
-        { name: 'West Africa Margin', size: '1.7 TB', lastModified: '2024-12-10', owner: 'Exploration Team' },
-        { name: 'Campos Basin Pre-Salt', size: '1.5 TB', lastModified: '2024-12-08', owner: 'Reservoir Team' }
+        { name: 'North Sea Block 15/25', size: '412 TB', lastModified: '2024-12-20', owner: 'Geophysics Team' },
+        { name: 'Johan Sverdrup Field', size: '378 TB', lastModified: '2024-12-18', owner: 'Reservoir Team' },
+        { name: 'Gulf of Mexico Deepwater', size: '345 TB', lastModified: '2024-12-15', owner: 'Exploration Team' },
+        { name: 'Barents Sea Regional', size: '298 TB', lastModified: '2024-12-12', owner: 'Geophysics Team' },
+        { name: 'West Africa Margin', size: '267 TB', lastModified: '2024-12-10', owner: 'Exploration Team' },
+        { name: 'Campos Basin Pre-Salt', size: '234 TB', lastModified: '2024-12-08', owner: 'Reservoir Team' }
       ],
       duplicates: [
         {
           id: '1',
           projects: ['North Sea Block 15/25 (2024)', 'North Sea Block 15/25 (Backup)'],
-          size: '3.2 TB',
+          size: '412 TB',
           similarity: 98.5
         },
         {
           id: '2',
           projects: ['Gulf of Mexico v1', 'Gulf of Mexico v2 (Copy)'],
-          size: '2.1 TB',
+          size: '345 TB',
           similarity: 95.2
         }
       ]
     },
     techlog: {
       chartData: [
-        { name: 'Jan', value: 5.2 },
-        { name: 'Feb', value: 5.4 },
-        { name: 'Mar', value: 5.6 },
-        { name: 'Apr', value: 5.9 },
-        { name: 'May', value: 6.2 },
-        { name: 'Jun', value: 6.5 },
-        { name: 'Jul', value: 6.8 },
-        { name: 'Aug', value: 7.0 },
-        { name: 'Sep', value: 7.3 },
-        { name: 'Oct', value: 7.5 },
-        { name: 'Nov', value: 7.8 },
-        { name: 'Dec', value: 8.0 }
+        { name: 'Jan 2024', value: 567 },
+        { name: 'Feb 2024', value: 589 },
+        { name: 'Mar 2024', value: 612 },
+        { name: 'Apr 2024', value: 634 },
+        { name: 'May 2024', value: 658 },
+        { name: 'Jun 2024', value: 681 },
+        { name: 'Jul 2024', value: 703 },
+        { name: 'Aug 2024', value: 727 },
+        { name: 'Sep 2024', value: 751 },
+        { name: 'Oct 2024', value: 773 },
+        { name: 'Nov 2024', value: 796 },
+        { name: 'Dec 2024', value: 820 }
       ],
       added: [
-        { name: 'Well Alpha-7H Logs', size: '340 GB', lastModified: '2024-12-18', owner: 'Petrophysics Team' },
-        { name: 'Beta-12 Formation Evaluation', size: '280 GB', lastModified: '2024-12-12', owner: 'Well Team' }
+        { name: 'Well Alpha-7H Logs', size: '67 TB', lastModified: '2024-12-18', owner: 'Petrophysics Team' },
+        { name: 'Beta-12 Formation Evaluation', size: '54 TB', lastModified: '2024-12-12', owner: 'Well Team' }
       ],
       removed: [
-        { name: 'Old Training Logs 2020', size: '125 GB', lastModified: '2024-12-05', owner: 'Archived' }
+        { name: 'Old Training Logs 2020', size: '43 TB', lastModified: '2024-12-05', owner: 'Archived' }
       ],
       projects: [
-        { name: 'North Sea Wells Q4 2024', size: '1.8 TB', lastModified: '2024-12-20', owner: 'Petrophysics Team' },
-        { name: 'Permian Basin Analysis', size: '1.5 TB', lastModified: '2024-12-18', owner: 'Well Team' },
-        { name: 'Gulf Coast Exploration', size: '1.3 TB', lastModified: '2024-12-15', owner: 'Petrophysics Team' },
-        { name: 'Offshore Brazil Logs', size: '1.1 TB', lastModified: '2024-12-12', owner: 'Well Team' },
-        { name: 'Bakken Formation Study', size: '980 GB', lastModified: '2024-12-10', owner: 'Petrophysics Team' }
+        { name: 'North Sea Wells Q4 2024', size: '189 TB', lastModified: '2024-12-20', owner: 'Petrophysics Team' },
+        { name: 'Permian Basin Analysis', size: '167 TB', lastModified: '2024-12-18', owner: 'Well Team' },
+        { name: 'Gulf Coast Exploration', size: '145 TB', lastModified: '2024-12-15', owner: 'Petrophysics Team' },
+        { name: 'Offshore Brazil Logs', size: '123 TB', lastModified: '2024-12-12', owner: 'Well Team' },
+        { name: 'Bakken Formation Study', size: '98 TB', lastModified: '2024-12-10', owner: 'Petrophysics Team' }
       ],
       duplicates: [
         {
           id: '1',
           projects: ['North Sea Wells Q4 2024', 'North Sea Wells Q4 2024 (Working Copy)'],
-          size: '1.8 TB',
+          size: '189 TB',
           similarity: 97.8
         }
       ]
     },
     eclipse: {
       chartData: [
-        { name: 'Jan', value: 3.8 },
-        { name: 'Feb', value: 3.9 },
-        { name: 'Mar', value: 4.1 },
-        { name: 'Apr', value: 4.2 },
-        { name: 'May', value: 4.4 },
-        { name: 'Jun', value: 4.6 },
-        { name: 'Jul', value: 4.8 },
-        { name: 'Aug', value: 5.0 },
-        { name: 'Sep', value: 5.1 },
-        { name: 'Oct', value: 5.3 },
-        { name: 'Nov', value: 5.4 },
-        { name: 'Dec', value: 5.6 }
+        { name: 'Jan 2024', value: 423 },
+        { name: 'Feb 2024', value: 438 },
+        { name: 'Mar 2024', value: 451 },
+        { name: 'Apr 2024', value: 467 },
+        { name: 'May 2024', value: 482 },
+        { name: 'Jun 2024', value: 496 },
+        { name: 'Jul 2024', value: 511 },
+        { name: 'Aug 2024', value: 528 },
+        { name: 'Sep 2024', value: 542 },
+        { name: 'Oct 2024', value: 557 },
+        { name: 'Nov 2024', value: 571 },
+        { name: 'Dec 2024', value: 589 }
       ],
       added: [
-        { name: 'Johan Sverdrup Phase 2', size: '890 GB', lastModified: '2024-12-16', owner: 'Reservoir Team' },
-        { name: 'Thunder Horse Expansion', size: '720 GB', lastModified: '2024-12-08', owner: 'Production Team' }
+        { name: 'Johan Sverdrup Phase 2', size: '112 TB', lastModified: '2024-12-16', owner: 'Reservoir Team' },
+        { name: 'Thunder Horse Expansion', size: '94 TB', lastModified: '2024-12-08', owner: 'Production Team' }
       ],
       removed: [
-        { name: 'Legacy Simulation 2018', size: '340 GB', lastModified: '2024-11-30', owner: 'Archived' }
+        { name: 'Legacy Simulation 2018', size: '76 TB', lastModified: '2024-11-30', owner: 'Archived' }
       ],
       projects: [
-        { name: 'Johan Sverdrup Field Model', size: '1.4 TB', lastModified: '2024-12-20', owner: 'Reservoir Team' },
-        { name: 'Lula Field Brazil', size: '1.2 TB', lastModified: '2024-12-17', owner: 'Production Team' },
-        { name: 'Thunder Horse GOM', size: '980 GB', lastModified: '2024-12-14', owner: 'Reservoir Team' },
-        { name: 'Kashagan Kazakhstan', size: '850 GB', lastModified: '2024-12-11', owner: 'Production Team' }
+        { name: 'Johan Sverdrup Field Model', size: '156 TB', lastModified: '2024-12-20', owner: 'Reservoir Team' },
+        { name: 'Lula Field Brazil', size: '134 TB', lastModified: '2024-12-17', owner: 'Production Team' },
+        { name: 'Thunder Horse GOM', size: '118 TB', lastModified: '2024-12-14', owner: 'Reservoir Team' },
+        { name: 'Kashagan Kazakhstan', size: '102 TB', lastModified: '2024-12-11', owner: 'Production Team' }
       ],
       duplicates: [
         {
           id: '1',
           projects: ['Johan Sverdrup Field Model v3', 'Johan Sverdrup Field Model v3 (Backup)'],
-          size: '1.4 TB',
+          size: '156 TB',
           similarity: 99.1
         }
       ]
     },
     resinsight: {
       chartData: [
-        { name: 'Jan', value: 2.1 },
-        { name: 'Feb', value: 2.2 },
-        { name: 'Mar', value: 2.3 },
-        { name: 'Apr', value: 2.4 },
-        { name: 'May', value: 2.5 },
-        { name: 'Jun', value: 2.6 },
-        { name: 'Jul', value: 2.7 },
-        { name: 'Aug', value: 2.8 },
-        { name: 'Sep', value: 2.9 },
-        { name: 'Oct', value: 3.0 },
-        { name: 'Nov', value: 3.1 },
-        { name: 'Dec', value: 3.2 }
+        { name: 'Jan 2024', value: 234 },
+        { name: 'Feb 2024', value: 245 },
+        { name: 'Mar 2024', value: 256 },
+        { name: 'Apr 2024', value: 268 },
+        { name: 'May 2024', value: 279 },
+        { name: 'Jun 2024', value: 291 },
+        { name: 'Jul 2024', value: 303 },
+        { name: 'Aug 2024', value: 315 },
+        { name: 'Sep 2024', value: 327 },
+        { name: 'Oct 2024', value: 339 },
+        { name: 'Nov 2024', value: 351 },
+        { name: 'Dec 2024', value: 364 }
       ],
       added: [
-        { name: 'Production Analysis 2024 Q4', size: '450 GB', lastModified: '2024-12-19', owner: 'Visualization Team' }
+        { name: 'Production Analysis 2024 Q4', size: '58 TB', lastModified: '2024-12-19', owner: 'Visualization Team' }
       ],
       removed: [
-        { name: 'Test Visualizations 2023', size: '180 GB', lastModified: '2024-12-03', owner: 'Archived' }
+        { name: 'Test Visualizations 2023', size: '41 TB', lastModified: '2024-12-03', owner: 'Archived' }
       ],
       projects: [
-        { name: 'Field Performance Dashboard', size: '890 GB', lastModified: '2024-12-20', owner: 'Visualization Team' },
-        { name: 'Well Performance Analysis', size: '740 GB', lastModified: '2024-12-18', owner: 'Production Team' },
-        { name: 'Reservoir Monitoring 2024', size: '620 GB', lastModified: '2024-12-15', owner: 'Visualization Team' },
-        { name: 'Historical Production Review', size: '510 GB', lastModified: '2024-12-12', owner: 'Production Team' }
+        { name: 'Field Performance Dashboard', size: '97 TB', lastModified: '2024-12-20', owner: 'Visualization Team' },
+        { name: 'Well Performance Analysis', size: '82 TB', lastModified: '2024-12-18', owner: 'Production Team' },
+        { name: 'Reservoir Monitoring 2024', size: '69 TB', lastModified: '2024-12-15', owner: 'Visualization Team' },
+        { name: 'Historical Production Review', size: '56 TB', lastModified: '2024-12-12', owner: 'Production Team' }
       ],
       duplicates: []
     }
@@ -513,47 +613,47 @@ const Overview: React.FC = () => {
 
   const seismicData = {
     chartData: [
-      { name: 'Jan', value: 23.8 },
-      { name: 'Feb', value: 23.6 },
-      { name: 'Mar', value: 23.4 },
-      { name: 'Apr', value: 23.2 },
-      { name: 'May', value: 23.1 },
-      { name: 'Jun', value: 23.0 },
-      { name: 'Jul', value: 22.9 },
-      { name: 'Aug', value: 22.8 },
-      { name: 'Sep', value: 22.7 },
-      { name: 'Oct', value: 22.6 },
-      { name: 'Nov', value: 22.5 },
-      { name: 'Dec', value: 23.5 }
+      { name: 'Jan 2024', value: 2567 },
+      { name: 'Feb 2024', value: 2534 },
+      { name: 'Mar 2024', value: 2489 },
+      { name: 'Apr 2024', value: 2445 },
+      { name: 'May 2024', value: 2401 },
+      { name: 'Jun 2024', value: 2378 },
+      { name: 'Jul 2024', value: 2334 },
+      { name: 'Aug 2024', value: 2312 },
+      { name: 'Sep 2024', value: 2289 },
+      { name: 'Oct 2024', value: 2267 },
+      { name: 'Nov 2024', value: 2245 },
+      { name: 'Dec 2024', value: 2298 }
     ],
     added: [
-      { name: 'North Sea 3D Survey 2024.segy', size: '4.2 TB', lastModified: '2024-12-18', owner: 'Acquisition Team' },
-      { name: 'GulfOfMexico_4D_Monitor.sgy', size: '3.8 TB', lastModified: '2024-12-10', owner: 'Processing Team' },
-      { name: 'Barents_Sea_Regional.seg', size: '2.1 TB', lastModified: '2024-11-25', owner: 'Geophysics Team' }
+      { name: 'North Sea 3D Survey 2024.segy', size: '487 TB', lastModified: '2024-12-18', owner: 'Acquisition Team' },
+      { name: 'GulfOfMexico_4D_Monitor.sgy', size: '423 TB', lastModified: '2024-12-10', owner: 'Processing Team' },
+      { name: 'Barents_Sea_Regional.seg', size: '356 TB', lastModified: '2024-11-25', owner: 'Geophysics Team' }
     ],
     removed: [
-      { name: 'Legacy_2D_1998.segy', size: '890 GB', lastModified: '2024-12-01', owner: 'Archived' },
-      { name: 'Test_Processing_2023.sgy', size: '1.2 TB', lastModified: '2024-11-20', owner: 'Archived' }
+      { name: 'Legacy_2D_1998.segy', size: '198 TB', lastModified: '2024-12-01', owner: 'Archived' },
+      { name: 'Test_Processing_2023.sgy', size: '234 TB', lastModified: '2024-11-20', owner: 'Archived' }
     ],
     files: [
-      { name: 'North_Sea_Block_15-25_3D.segy', size: '8.5 TB', lastModified: '2024-12-20', owner: 'Geophysics Team' },
-      { name: 'Johan_Sverdrup_4D_Baseline.sgy', size: '6.8 TB', lastModified: '2024-12-18', owner: 'Reservoir Team' },
-      { name: 'GOM_Deepwater_3D_Final.segy', size: '5.4 TB', lastModified: '2024-12-15', owner: 'Processing Team' },
-      { name: 'Barents_Regional_2D.seg', size: '3.2 TB', lastModified: '2024-12-12', owner: 'Acquisition Team' },
-      { name: 'West_Africa_PreSTM.segy', size: '4.9 TB', lastModified: '2024-12-10', owner: 'Processing Team' },
-      { name: 'Brazil_PreSalt_3D.sgy', size: '7.1 TB', lastModified: '2024-12-08', owner: 'Geophysics Team' }
+      { name: 'North_Sea_Block_15-25_3D.segy', size: '856 TB', lastModified: '2024-12-20', owner: 'Geophysics Team' },
+      { name: 'Johan_Sverdrup_4D_Baseline.sgy', size: '712 TB', lastModified: '2024-12-18', owner: 'Reservoir Team' },
+      { name: 'GOM_Deepwater_3D_Final.segy', size: '634 TB', lastModified: '2024-12-15', owner: 'Processing Team' },
+      { name: 'Barents_Regional_2D.seg', size: '567 TB', lastModified: '2024-12-12', owner: 'Acquisition Team' },
+      { name: 'West_Africa_PreSTM.segy', size: '523 TB', lastModified: '2024-12-10', owner: 'Processing Team' },
+      { name: 'Brazil_PreSalt_3D.sgy', size: '689 TB', lastModified: '2024-12-08', owner: 'Geophysics Team' }
     ],
     duplicates: [
       {
         id: '1',
         projects: ['North_Sea_Block_15-25_3D.segy', 'North_Sea_Block_15-25_3D_backup.segy'],
-        size: '8.5 TB',
+        size: '856 TB',
         similarity: 99.8
       },
       {
         id: '2',
         projects: ['GOM_Deepwater_3D_Final.segy', 'GOM_Deepwater_3D_Final_v2.segy'],
-        size: '5.4 TB',
+        size: '634 TB',
         similarity: 98.9
       }
     ]
@@ -561,48 +661,48 @@ const Overview: React.FC = () => {
 
   const wellsData = {
     chartData: [
-      { name: 'Jan', value: 13.2 },
-      { name: 'Feb', value: 13.1 },
-      { name: 'Mar', value: 13.0 },
-      { name: 'Apr', value: 12.9 },
-      { name: 'May', value: 12.8 },
-      { name: 'Jun', value: 12.7 },
-      { name: 'Jul', value: 12.6 },
-      { name: 'Aug', value: 12.5 },
-      { name: 'Sep', value: 12.5 },
-      { name: 'Oct', value: 12.4 },
-      { name: 'Nov', value: 12.4 },
-      { name: 'Dec', value: 12.8 }
+      { name: 'Jan 2024', value: 1134 },
+      { name: 'Feb 2024', value: 1123 },
+      { name: 'Mar 2024', value: 1112 },
+      { name: 'Apr 2024', value: 1101 },
+      { name: 'May 2024', value: 1091 },
+      { name: 'Jun 2024', value: 1080 },
+      { name: 'Jul 2024', value: 1071 },
+      { name: 'Aug 2024', value: 1062 },
+      { name: 'Sep 2024', value: 1054 },
+      { name: 'Oct 2024', value: 1045 },
+      { name: 'Nov 2024', value: 1038 },
+      { name: 'Dec 2024', value: 1067 }
     ],
     added: [
-      { name: 'Well_Alpha-7H_Composite.las', size: '450 MB', lastModified: '2024-12-19', owner: 'Petrophysics Team' },
-      { name: 'Beta-12_Formation_Eval.dlis', size: '680 MB', lastModified: '2024-12-14', owner: 'Well Logging Team' },
-      { name: 'Gamma-3_Raw_Data.lis', size: '320 MB', lastModified: '2024-12-08', owner: 'Acquisition Team' }
+      { name: 'Well_Alpha-7H_Composite.las', size: '54 TB', lastModified: '2024-12-19', owner: 'Petrophysics Team' },
+      { name: 'Beta-12_Formation_Eval.dlis', size: '47 TB', lastModified: '2024-12-14', owner: 'Well Logging Team' },
+      { name: 'Gamma-3_Raw_Data.lis', size: '38 TB', lastModified: '2024-12-08', owner: 'Acquisition Team' }
     ],
     removed: [
-      { name: 'Training_Well_2019.las', size: '120 MB', lastModified: '2024-12-02', owner: 'Archived' },
-      { name: 'Legacy_Logs_1995.lis', size: '280 MB', lastModified: '2024-11-18', owner: 'Archived' }
+      { name: 'Training_Well_2019.las', size: '29 TB', lastModified: '2024-12-02', owner: 'Archived' },
+      { name: 'Legacy_Logs_1995.lis', size: '41 TB', lastModified: '2024-11-18', owner: 'Archived' }
     ],
     files: [
-      { name: 'NS_15-25-A_Complete_Suite.las', size: '1.2 GB', lastModified: '2024-12-20', owner: 'Petrophysics Team' },
-      { name: 'Johan_Sverdrup_P1_Logs.dlis', size: '980 MB', lastModified: '2024-12-18', owner: 'Well Logging Team' },
-      { name: 'GOM_Thunder_Horse_A3.las', size: '850 MB', lastModified: '2024-12-16', owner: 'Petrophysics Team' },
-      { name: 'Barents_Wildcat_7220-8-1.lis', size: '720 MB', lastModified: '2024-12-14', owner: 'Acquisition Team' },
-      { name: 'Brazil_Lula_Production_23.dlis', size: '1.1 GB', lastModified: '2024-12-12', owner: 'Well Logging Team' },
-      { name: 'North_Sea_15-9-19SR_M.las', size: '640 MB', lastModified: '2024-12-10', owner: 'Petrophysics Team' },
-      { name: 'Permian_Horizontal_Well_H7.las', size: '890 MB', lastModified: '2024-12-08', owner: 'Petrophysics Team' }
+      { name: 'NS_15-25-A_Complete_Suite.las', size: '123 TB', lastModified: '2024-12-20', owner: 'Petrophysics Team' },
+      { name: 'Johan_Sverdrup_P1_Logs.dlis', size: '108 TB', lastModified: '2024-12-18', owner: 'Well Logging Team' },
+      { name: 'GOM_Thunder_Horse_A3.las', size: '94 TB', lastModified: '2024-12-16', owner: 'Petrophysics Team' },
+      { name: 'Barents_Wildcat_7220-8-1.lis', size: '82 TB', lastModified: '2024-12-14', owner: 'Acquisition Team' },
+      { name: 'Brazil_Lula_Production_23.dlis', size: '119 TB', lastModified: '2024-12-12', owner: 'Well Logging Team' },
+      { name: 'North_Sea_15-9-19SR_M.las', size: '76 TB', lastModified: '2024-12-10', owner: 'Petrophysics Team' },
+      { name: 'Permian_Horizontal_Well_H7.las', size: '97 TB', lastModified: '2024-12-08', owner: 'Petrophysics Team' }
     ],
     duplicates: [
       {
         id: '1',
         projects: ['NS_15-25-A_Complete_Suite.las', 'NS_15-25-A_Complete_Suite_backup.las'],
-        size: '1.2 GB',
+        size: '123 TB',
         similarity: 99.5
       },
       {
         id: '2',
         projects: ['Permian_Horizontal_Well_H7.las', 'Permian_Horizontal_Well_H7_v2.las'],
-        size: '890 MB',
+        size: '97 TB',
         similarity: 97.3
       }
     ]
@@ -893,18 +993,18 @@ const Overview: React.FC = () => {
                   title="12-Month Storage Trend"
                   description="Storage optimization showing gradual reduction in total usage"
                   data={[
-                    { name: 'Jan', value: 52.1 },
-                    { name: 'Feb', value: 51.3 },
-                    { name: 'Mar', value: 50.2 },
-                    { name: 'Apr', value: 49.5 },
-                    { name: 'May', value: 48.9 },
-                    { name: 'Jun', value: 48.1 },
-                    { name: 'Jul', value: 47.8 },
-                    { name: 'Aug', value: 47.3 },
-                    { name: 'Sep', value: 47.0 },
-                    { name: 'Oct', value: 46.5 },
-                    { name: 'Nov', value: 46.2 },
-                    { name: 'Dec', value: 47.3 }
+                    { name: 'Jan 2024', value: 5346 },
+                    { name: 'Feb 2024', value: 5289 },
+                    { name: 'Mar 2024', value: 5198 },
+                    { name: 'Apr 2024', value: 5123 },
+                    { name: 'May 2024', value: 5067 },
+                    { name: 'Jun 2024', value: 4989 },
+                    { name: 'Jul 2024', value: 4912 },
+                    { name: 'Aug 2024', value: 4856 },
+                    { name: 'Sep 2024', value: 4801 },
+                    { name: 'Oct 2024', value: 4745 },
+                    { name: 'Nov 2024', value: 4689 },
+                    { name: 'Dec 2024', value: 4723 }
                   ]}
                   chartType="line"
                 />
@@ -917,10 +1017,10 @@ const Overview: React.FC = () => {
                   title="Storage by Data Type"
                   description="Distribution of storage across different data categories"
                   data={[
-                    { name: 'Seismic Data', value: 23.5 },
-                    { name: 'Well Logs', value: 12.8 },
-                    { name: 'Project Files', value: 8.4 },
-                    { name: 'Interpretations', value: 2.6 }
+                    { name: 'Seismic Data', value: 2298 },
+                    { name: 'Well Logs', value: 1067 },
+                    { name: 'Project Files', value: 1645 },
+                    { name: 'Interpretations', value: 364 }
                   ]}
                   chartType="pie"
                 />
@@ -964,7 +1064,7 @@ const Overview: React.FC = () => {
                 corruptFiles={mockFiles.filter(f => f.isCorrupt && (f.path.includes('projects') || f.path.includes('backup'))).length}
                 oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && (f.path.includes('projects') || f.path.includes('backup'))).length}
                 staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && (f.path.includes('projects') || f.path.includes('backup'))).length}
-                totalSize="3.8 TB"
+                totalSize="1.9 PB"
                 onViewCorrupt={() => handleViewQualityCategory('corrupt')}
                 onViewOld={() => handleViewQualityCategory('old')}
                 onViewStale={() => handleViewQualityCategory('stale')}
@@ -1014,7 +1114,7 @@ const Overview: React.FC = () => {
                 corruptFiles={mockFiles.filter(f => f.isCorrupt && f.path.includes('seismic')).length}
                 oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && f.path.includes('seismic')).length}
                 staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && f.path.includes('seismic')).length}
-                totalSize="23.5 TB"
+                totalSize="2.3 PB"
                 onViewCorrupt={() => handleViewQualityCategory('corrupt')}
                 onViewOld={() => handleViewQualityCategory('old')}
                 onViewStale={() => handleViewQualityCategory('stale')}
@@ -1064,7 +1164,7 @@ const Overview: React.FC = () => {
                 corruptFiles={mockFiles.filter(f => f.isCorrupt && f.path.includes('wells')).length}
                 oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && f.path.includes('wells')).length}
                 staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && f.path.includes('wells')).length}
-                totalSize="12.8 TB"
+                totalSize="1.1 PB"
                 onViewCorrupt={() => handleViewQualityCategory('corrupt')}
                 onViewOld={() => handleViewQualityCategory('old')}
                 onViewStale={() => handleViewQualityCategory('stale')}
