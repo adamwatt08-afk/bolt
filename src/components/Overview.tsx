@@ -27,6 +27,8 @@ import MetadataTagging from './MetadataTagging';
 import BulkActions from './BulkActions';
 import FileListView from './FileListView';
 import QueryAnalytics from './QueryAnalytics';
+import FileAnalytics from './FileAnalytics';
+import { analyzeFiles, FileMetadata } from '../utils/fileAnalytics';
 
 interface Project {
   name: string;
@@ -43,11 +45,116 @@ interface DuplicateGroup {
 }
 
 const Overview: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'applications' | 'seismic' | 'wells' | 'dataManagement' | 'queryAnalytics'>('applications');
+  const [activeTab, setActiveTab] = useState<'applications' | 'seismic' | 'wells' | 'dataManagement' | 'queryAnalytics' | 'analytics'>('applications');
   const [expandedApp, setExpandedApp] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({});
   const [viewMode, setViewMode] = useState<'corrupt' | 'old' | 'stale' | 'all'>('all');
+
+  const mockFileMetadata: FileMetadata[] = [
+    {
+      name: 'North_Sea_Legacy_2019.segy',
+      path: '/seismic/archived/',
+      extension: 'segy',
+      size: 1200000000000,
+      lastAccess: new Date('2023-08-15'),
+      lastModified: new Date('2023-08-10'),
+      createDate: new Date('2019-03-15'),
+      fileOwners: ['Geophysics Team']
+    },
+    {
+      name: 'Training_Data_2020.las',
+      path: '/wells/training/',
+      extension: 'las',
+      size: 450000000000,
+      lastAccess: new Date('2023-11-20'),
+      lastModified: new Date('2023-11-15'),
+      createDate: new Date('2020-05-22'),
+      fileOwners: ['Training Team']
+    },
+    {
+      name: 'Backup_Petrel_Project.pet',
+      path: '/projects/backups/',
+      extension: 'pet',
+      size: 890000000000,
+      lastAccess: new Date('2024-03-10'),
+      lastModified: new Date('2024-03-08'),
+      createDate: new Date('2023-01-20'),
+      fileOwners: ['Interpretation Team']
+    },
+    {
+      name: 'Corrupted_Survey_2023.sgy',
+      path: '/seismic/processing/',
+      extension: 'sgy',
+      size: 2300000000000,
+      lastAccess: new Date('2024-01-05'),
+      lastModified: new Date('2024-01-03'),
+      createDate: new Date('2023-08-10'),
+      fileOwners: ['Processing Team']
+    },
+    {
+      name: 'Old_Simulation_2018.data',
+      path: '/reservoir/legacy/',
+      extension: 'data',
+      size: 680000000000,
+      lastAccess: new Date('2023-09-22'),
+      lastModified: new Date('2023-09-20'),
+      createDate: new Date('2018-12-05'),
+      fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'North_Sea_Block_15-25_3D.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 8500000000000,
+      lastAccess: new Date('2024-12-20'),
+      lastModified: new Date('2024-12-18'),
+      createDate: new Date('2024-06-10'),
+      fileOwners: ['Geophysics Team', 'Processing Team']
+    },
+    {
+      name: 'Johan_Sverdrup_4D_Baseline.sgy',
+      path: '/seismic/active/',
+      extension: 'sgy',
+      size: 6800000000000,
+      lastAccess: new Date('2024-12-18'),
+      lastModified: new Date('2024-12-15'),
+      createDate: new Date('2024-04-22'),
+      fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'NS_15-25-A_Complete_Suite.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 1200000000,
+      lastAccess: new Date('2024-12-20'),
+      lastModified: new Date('2024-12-19'),
+      createDate: new Date('2024-11-05'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'Johan_Sverdrup_P1_Logs.dlis',
+      path: '/wells/active/',
+      extension: 'dlis',
+      size: 980000000,
+      lastAccess: new Date('2024-12-18'),
+      lastModified: new Date('2024-12-17'),
+      createDate: new Date('2024-10-12'),
+      fileOwners: ['Well Logging Team']
+    },
+    {
+      name: 'Johan_Sverdrup_Field_Model.ecl',
+      path: '/reservoir/active/',
+      extension: 'ecl',
+      size: 1400000000000,
+      lastAccess: new Date('2024-12-20'),
+      lastModified: new Date('2024-12-19'),
+      createDate: new Date('2024-08-15'),
+      fileOwners: ['Reservoir Team']
+    }
+  ];
+
+  const fileAnalytics = analyzeFiles(mockFileMetadata);
 
   const mockFiles = [
     {
@@ -786,6 +893,19 @@ const Overview: React.FC = () => {
                 <span>Query & Analytics</span>
               </div>
             </button>
+            <button
+              onClick={() => setActiveTab('analytics')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'analytics'
+                  ? 'text-cegal-green border-b-2 border-cegal-green'
+                  : 'text-cegal-gray-400 hover:text-white'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <Activity className="h-4 w-4" />
+                <span>File Analytics</span>
+              </div>
+            </button>
           </div>
         </div>
 
@@ -858,6 +978,12 @@ const Overview: React.FC = () => {
         {activeTab === 'queryAnalytics' && (
           <div className="space-y-6">
             <QueryAnalytics />
+          </div>
+        )}
+
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            <FileAnalytics analytics={fileAnalytics} />
           </div>
         )}
       </div>
