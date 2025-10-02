@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #16212C;
+    color: white;
+  }
+}
+
+@layer components {
+  .btn-cegal-primary {
+    @apply bg-gradient-cegal text-white font-medium px-6 py-3 rounded-lg hover:shadow-cegal transition-all duration-300 transform hover:-translate-y-0.5 border border-cegal-primary/20;
+  }
+  
+  .btn-cegal-secondary {
+    @apply border-2 border-cegal-primary text-cegal-primary font-medium px-6 py-3 rounded-lg hover:bg-cegal-primary hover:text-white transition-all duration-300 bg-cegal-darker;
+  }
+  
+  .card-cegal {
+    @apply bg-cegal-darker rounded-xl shadow-sm border border-cegal-gray-700 hover:shadow-cegal transition-all duration-300;
+  }
+  
+  .gradient-text {
+    @apply text-cegal-green;
+  }
+}
