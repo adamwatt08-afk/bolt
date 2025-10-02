@@ -32,13 +32,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     {
       title: 'Command Centre',
       items: [
-        { id: 'overview', label: 'Overview', icon: BarChart3 },
+        { id: 'setup', label: 'Setup', icon: Wrench },
       ]
     },
     {
       title: 'Core',
       items: [
-        { id: 'setup', label: 'Setup', icon: Wrench },
+        { id: 'overview', label: 'Overview', icon: BarChart3 },
       ]
     },
     {
