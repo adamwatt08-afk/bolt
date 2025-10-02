@@ -837,6 +837,9 @@ const Overview: React.FC = () => {
       totalProjects: 8547,
       totalSize: '1.65 PB',
       activeUsers: 342,
+      duplicateGroups: 47,
+      duplicateSize: '412 TB',
+      duplicatePercentage: 24.9,
       chartData: [
         { name: 'Jan 2024', value: 1247 },
         { name: 'Feb 2024', value: 1289 },
@@ -887,6 +890,9 @@ const Overview: React.FC = () => {
       totalProjects: 12834,
       totalSize: '820 TB',
       activeUsers: 218,
+      duplicateGroups: 134,
+      duplicateSize: '189 TB',
+      duplicatePercentage: 23.0,
       chartData: [
         { name: 'Jan 2024', value: 567 },
         { name: 'Feb 2024', value: 589 },
@@ -928,6 +934,9 @@ const Overview: React.FC = () => {
       totalProjects: 3567,
       totalSize: '589 TB',
       activeUsers: 156,
+      duplicateGroups: 28,
+      duplicateSize: '156 TB',
+      duplicatePercentage: 26.5,
       chartData: [
         { name: 'Jan 2024', value: 423 },
         { name: 'Feb 2024', value: 438 },
@@ -968,6 +977,9 @@ const Overview: React.FC = () => {
       totalProjects: 2189,
       totalSize: '364 TB',
       activeUsers: 94,
+      duplicateGroups: 12,
+      duplicateSize: '58 TB',
+      duplicatePercentage: 15.9,
       chartData: [
         { name: 'Jan 2024', value: 234 },
         { name: 'Feb 2024', value: 245 },
@@ -1002,6 +1014,9 @@ const Overview: React.FC = () => {
     totalFiles: 47823,
     totalSize: '2.30 PB',
     activeUsers: 487,
+    duplicateGroups: 892,
+    duplicateSize: '634 TB',
+    duplicatePercentage: 27.6,
     chartData: [
       { name: 'Jan 2024', value: 2567 },
       { name: 'Feb 2024', value: 2534 },
@@ -1053,6 +1068,9 @@ const Overview: React.FC = () => {
     totalFiles: 89456,
     totalSize: '1.07 PB',
     activeUsers: 623,
+    duplicateGroups: 1247,
+    duplicateSize: '267 TB',
+    duplicatePercentage: 24.9,
     chartData: [
       { name: 'Jan 2024', value: 1134 },
       { name: 'Feb 2024', value: 1123 },
@@ -1148,21 +1166,45 @@ const Overview: React.FC = () => {
                 </button>
               </div>
               {(appData.totalProjects !== undefined || appData.totalFiles !== undefined) && (
-                <div className="grid grid-cols-3 gap-4 mt-4">
-                  <div className="bg-cegal-gray-800 rounded-lg p-3">
-                    <p className="text-xs text-cegal-gray-400">{appData.totalProjects !== undefined ? 'Total Projects' : 'Total Files'}</p>
-                    <p className="text-lg font-semibold text-cegal-green mt-1">
-                      {appData.totalProjects !== undefined ? appData.totalProjects.toLocaleString() : appData.totalFiles.toLocaleString()}
-                    </p>
+                <div className="space-y-4 mt-4">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-cegal-gray-800 rounded-lg p-3">
+                      <p className="text-xs text-cegal-gray-400">{appData.totalProjects !== undefined ? 'Total Projects' : 'Total Files'}</p>
+                      <p className="text-lg font-semibold text-cegal-green mt-1">
+                        {appData.totalProjects !== undefined ? appData.totalProjects.toLocaleString() : appData.totalFiles.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="bg-cegal-gray-800 rounded-lg p-3">
+                      <p className="text-xs text-cegal-gray-400">Total Size</p>
+                      <p className="text-lg font-semibold text-cegal-green mt-1">{appData.totalSize}</p>
+                    </div>
+                    <div className="bg-cegal-gray-800 rounded-lg p-3">
+                      <p className="text-xs text-cegal-gray-400">Active Users</p>
+                      <p className="text-lg font-semibold text-cegal-green mt-1">{appData.activeUsers}</p>
+                    </div>
                   </div>
-                  <div className="bg-cegal-gray-800 rounded-lg p-3">
-                    <p className="text-xs text-cegal-gray-400">Total Size</p>
-                    <p className="text-lg font-semibold text-cegal-green mt-1">{appData.totalSize}</p>
-                  </div>
-                  <div className="bg-cegal-gray-800 rounded-lg p-3">
-                    <p className="text-xs text-cegal-gray-400">Active Users</p>
-                    <p className="text-lg font-semibold text-cegal-green mt-1">{appData.activeUsers}</p>
-                  </div>
+
+                  {appData.duplicateGroups !== undefined && (
+                    <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="p-2 bg-yellow-600/20 rounded-lg">
+                            <Copy className="h-5 w-5 text-yellow-500" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-white">Duplicate Data Detected</p>
+                            <p className="text-xs text-cegal-gray-400 mt-1">
+                              {appData.duplicateGroups.toLocaleString()} duplicate groups found
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-yellow-500">{appData.duplicateSize}</p>
+                          <p className="text-xs text-cegal-gray-400">{appData.duplicatePercentage}% of total</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1423,6 +1465,47 @@ const Overview: React.FC = () => {
                   ]}
                   chartType="line"
                 />
+              </div>
+            </div>
+
+            <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
+              <div className="p-6 border-b border-cegal-gray-700">
+                <h3 className="text-lg font-semibold text-cegal-green">Data Duplication Overview</h3>
+                <p className="text-sm text-cegal-gray-400 mt-1">Potential storage savings from duplicate data removal</p>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Copy className="h-4 w-4 text-yellow-500" />
+                      <p className="text-xs font-medium text-yellow-500">Total Duplicate Groups</p>
+                    </div>
+                    <p className="text-2xl font-bold text-white">2,360</p>
+                  </div>
+                  <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <HardDrive className="h-4 w-4 text-yellow-500" />
+                      <p className="text-xs font-medium text-yellow-500">Duplicate Storage</p>
+                    </div>
+                    <p className="text-2xl font-bold text-white">1.72 PB</p>
+                  </div>
+                  <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <TrendingDown className="h-4 w-4 text-yellow-500" />
+                      <p className="text-xs font-medium text-yellow-500">Potential Savings</p>
+                    </div>
+                    <p className="text-2xl font-bold text-white">$428K</p>
+                    <p className="text-xs text-cegal-gray-400 mt-1">per month</p>
+                  </div>
+                  <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                      <p className="text-xs font-medium text-yellow-500">Duplication Rate</p>
+                    </div>
+                    <p className="text-2xl font-bold text-white">25.3%</p>
+                    <p className="text-xs text-cegal-gray-400 mt-1">of total storage</p>
+                  </div>
+                </div>
               </div>
             </div>
 
