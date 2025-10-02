@@ -334,7 +334,31 @@ const ReservoirSimulation: React.FC = () => {
     return Array.from(fieldMap.values());
   };
 
+  const getFieldAverages = () => {
+    const fieldAverages = fields.filter(f => f !== 'All').map(field => {
+      const fieldModels = simulationModels.filter(m => m.field === field);
+      const count = fieldModels.length;
+
+      if (count === 0) return null;
+
+      return {
+        field,
+        count,
+        avgGIIP: fieldModels.reduce((sum, m) => sum + (m.giip || 0), 0) / count,
+        avgSTOIIP: fieldModels.reduce((sum, m) => sum + (m.stoiip || 0), 0) / count,
+        avgRecoveryFactor: fieldModels.reduce((sum, m) => sum + (m.recoveryFactor || 0), 0) / count,
+        totalWells: fieldModels.reduce((sum, m) => sum + (m.activeWells || 0), 0),
+        avgProductionRate: fieldModels.reduce((sum, m) => sum + (m.productionRate || 0), 0) / count,
+        totalGIIP: fieldModels.reduce((sum, m) => sum + (m.giip || 0), 0),
+        totalSTOIIP: fieldModels.reduce((sum, m) => sum + (m.stoiip || 0), 0)
+      };
+    }).filter(Boolean);
+
+    return fieldAverages;
+  };
+
   const fieldStats = getFieldStats();
+  const fieldAverages = getFieldAverages();
 
   const totalIntersect = simulationModels.filter(m => m.classification.includes('iNav')).length;
   const totalStandalone = simulationModels.filter(m => m.classification.includes('Standalone')).length;
@@ -388,49 +412,62 @@ const ReservoirSimulation: React.FC = () => {
       </div>
 
       <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-cegal-gray-400" />
-            <input
-              type="text"
-              placeholder="Search models by field, project, classification, path, or tags..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-cegal-gray-600 rounded-lg focus:ring-2 focus:ring-cegal-primary focus:border-transparent bg-cegal-dark text-white"
-            />
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-white">Model Management</h3>
+          <div className="flex items-center gap-2 text-sm text-cegal-gray-400">
+            <span>{filteredModels.length} of {simulationModels.length} models</span>
           </div>
-          {selectedModels.size > 0 && (
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-cegal-gray-400">{selectedModels.size} selected</span>
+        </div>
+
+        <div className="flex flex-col gap-4 mb-4">
+          <div className="flex items-center gap-4">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-cegal-gray-400" />
+              <input
+                type="text"
+                placeholder="Search models by field, project, classification, path, or tags..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-cegal-gray-600 rounded-lg focus:ring-2 focus:ring-cegal-primary focus:border-transparent bg-cegal-dark text-white"
+              />
+            </div>
+          </div>
+
+          {selectedModels.size > 0 ? (
+            <div className="flex items-center justify-between p-3 bg-cegal-primary/10 border border-cegal-primary/30 rounded-lg">
+              <span className="text-sm text-white font-medium">{selectedModels.size} model{selectedModels.size > 1 ? 's' : ''} selected</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={archiveSelected}
+                  className="px-3 py-1.5 bg-cegal-dark hover:bg-cegal-gray-700 border border-cegal-gray-600 rounded-lg flex items-center gap-2 text-sm text-white transition-colors"
+                >
+                  <Archive className="h-4 w-4" />
+                  Archive
+                </button>
+                <button
+                  onClick={deleteSelected}
+                  className="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 rounded-lg flex items-center gap-2 text-sm text-red-400 transition-colors"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Delete
+                </button>
+                <button
+                  onClick={deselectAllModels}
+                  className="px-3 py-1.5 bg-cegal-dark hover:bg-cegal-gray-700 border border-cegal-gray-600 rounded-lg text-sm text-white transition-colors"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-end">
               <button
-                onClick={archiveSelected}
-                className="btn-cegal-secondary flex items-center gap-2"
+                onClick={selectAllModels}
+                className="px-3 py-1.5 bg-cegal-dark hover:bg-cegal-gray-700 border border-cegal-gray-600 rounded-lg text-sm text-white transition-colors"
               >
-                <Archive className="h-4 w-4" />
-                Archive
-              </button>
-              <button
-                onClick={deleteSelected}
-                className="btn-cegal-secondary flex items-center gap-2 hover:bg-red-500/20 hover:border-red-500"
-              >
-                <Trash2 className="h-4 w-4" />
-                Delete
-              </button>
-              <button
-                onClick={deselectAllModels}
-                className="btn-cegal-secondary"
-              >
-                Clear
+                Select All
               </button>
             </div>
-          )}
-          {selectedModels.size === 0 && (
-            <button
-              onClick={selectAllModels}
-              className="btn-cegal-secondary"
-            >
-              Select All
-            </button>
           )}
         </div>
 
@@ -457,7 +494,29 @@ const ReservoirSimulation: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredModels.map(model => (
+              {filteredModels.length === 0 ? (
+                <tr>
+                  <td colSpan={9} className="py-12 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <Database className="h-12 w-12 text-cegal-gray-600" />
+                      <div className="text-cegal-gray-400">
+                        {searchQuery ? (
+                          <>
+                            <div className="text-lg font-medium mb-1">No models found</div>
+                            <div className="text-sm">Try adjusting your search criteria</div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-lg font-medium mb-1">No models available</div>
+                            <div className="text-sm">Add models to get started</div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                filteredModels.map(model => (
                 <tr
                   key={model.id}
                   className={`border-b border-cegal-gray-800 hover:bg-cegal-gray-800/30 cursor-pointer ${
@@ -570,206 +629,179 @@ const ReservoirSimulation: React.FC = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
+                ))
+              )}
             </tbody>
           </table>
         </div>
 
         {selectedModelId && selectedModel && (
-          <div className="mt-4 p-4 bg-cegal-dark border border-cegal-primary/30 rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-                <Check className="h-4 w-4 text-cegal-primary" />
-                Selected Model: {selectedModel.projectName}
+          <div className="mt-4 p-5 bg-gradient-to-br from-cegal-primary/10 to-cegal-primary/5 border border-cegal-primary/30 rounded-lg">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-base font-semibold text-white flex items-center gap-2">
+                <Check className="h-5 w-5 text-cegal-primary" />
+                Selected: {selectedModel.projectName}
               </h4>
               <button
                 onClick={() => setSelectedModelId(null)}
-                className="text-cegal-gray-400 hover:text-white"
+                className="px-3 py-1.5 bg-cegal-dark/50 hover:bg-cegal-dark border border-cegal-gray-600 rounded-lg text-xs text-white transition-colors"
               >
                 Clear Selection
               </button>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-              <div>
-                <span className="text-cegal-gray-400">Field:</span>
-                <span className="ml-2 text-white">{selectedModel.field}</span>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="bg-cegal-dark/50 rounded-lg p-3">
+                <div className="text-xs text-cegal-gray-400 mb-1">Field</div>
+                <div className="text-sm font-semibold text-white">{selectedModel.field}</div>
               </div>
-              <div>
-                <span className="text-cegal-gray-400">GIIP:</span>
-                <span className="ml-2 text-white">{selectedModel.giip?.toFixed(1)} BCF</span>
+              <div className="bg-cegal-dark/50 rounded-lg p-3">
+                <div className="text-xs text-cegal-gray-400 mb-1">GIIP</div>
+                <div className="text-sm font-semibold text-emerald-400">{selectedModel.giip?.toFixed(1)} BCF</div>
               </div>
-              <div>
-                <span className="text-cegal-gray-400">STOIIP:</span>
-                <span className="ml-2 text-white">{selectedModel.stoiip?.toFixed(1)} MMbbl</span>
+              <div className="bg-cegal-dark/50 rounded-lg p-3">
+                <div className="text-xs text-cegal-gray-400 mb-1">STOIIP</div>
+                <div className="text-sm font-semibold text-blue-400">{selectedModel.stoiip?.toFixed(1)} MMbbl</div>
               </div>
-              <div>
-                <span className="text-cegal-gray-400">Production Rate:</span>
-                <span className="ml-2 text-white">{selectedModel.productionRate?.toLocaleString()} bbl/d</span>
+              <div className="bg-cegal-dark/50 rounded-lg p-3">
+                <div className="text-xs text-cegal-gray-400 mb-1">Recovery %</div>
+                <div className="text-sm font-semibold text-amber-400">{selectedModel.recoveryFactor?.toFixed(1)}%</div>
+              </div>
+              <div className="bg-cegal-dark/50 rounded-lg p-3">
+                <div className="text-xs text-cegal-gray-400 mb-1">Production</div>
+                <div className="text-sm font-semibold text-white">{selectedModel.productionRate?.toLocaleString()} bbl/d</div>
               </div>
             </div>
           </div>
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1 space-y-6">
-          <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-4">
-              <Folder className="h-5 w-5 text-cegal-primary" />
-              <h3 className="text-lg font-semibold text-white">Field</h3>
-            </div>
+      <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-bold text-white">Field Statistics Overview</h3>
+          <div className="flex items-center gap-2">
+            <Folder className="h-5 w-5 text-cegal-primary" />
             <select
               value={selectedField}
               onChange={(e) => setSelectedField(e.target.value)}
-              className="w-full px-3 py-2 border border-cegal-gray-600 rounded-lg focus:ring-2 focus:ring-cegal-primary focus:border-transparent bg-cegal-dark text-white"
+              className="px-3 py-2 border border-cegal-gray-600 rounded-lg focus:ring-2 focus:ring-cegal-primary focus:border-transparent bg-cegal-dark text-white text-sm"
             >
               {fields.map(field => (
                 <option key={field} value={field}>{field}</option>
               ))}
             </select>
           </div>
-
-          <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
-            <h3 className="text-lg font-semibold text-white mb-4">iNavigator Projects with Models</h3>
-            <div className="text-center mb-4">
-              <div className="text-5xl font-bold text-cegal-primary">6</div>
-            </div>
-
-            <div className="mb-4">
-              <div className="text-sm font-medium text-white mb-2">HiM Project in iNavigator Project (Blank)</div>
-            </div>
-
-            <div className="space-y-2 mb-4">
-              <h4 className="text-sm font-semibold text-cegal-gray-400">iNavigator Models</h4>
-              <div className="text-2xl font-bold text-white">10</div>
-            </div>
-
-            <div className="bg-cegal-dark rounded-lg p-3">
-              <h4 className="text-xs font-semibold text-cegal-gray-400 mb-2">Disk Storage (GB)</h4>
-              <div className="text-xl font-bold text-white">{totalDiskSpace.toFixed(2)}</div>
-            </div>
-          </div>
-
-          <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
-            <h3 className="text-sm font-semibold text-cegal-gray-400 mb-4">Field Distribution</h3>
-            <div className="relative h-48 flex items-center justify-center">
-              <svg width="180" height="180" viewBox="0 0 180 180">
-                {fieldDistribution.map((field, index) => {
-                  const total = fieldDistribution.reduce((sum, f) => sum + f.total, 0);
-                  let currentAngle = -90;
-
-                  for (let i = 0; i < index; i++) {
-                    currentAngle += (fieldDistribution[i].total / total) * 360;
-                  }
-
-                  const angle = (field.total / total) * 360;
-                  const startAngle = (currentAngle * Math.PI) / 180;
-                  const endAngle = ((currentAngle + angle) * Math.PI) / 180;
-
-                  const startX = 90 + 70 * Math.cos(startAngle);
-                  const startY = 90 + 70 * Math.sin(startAngle);
-                  const endX = 90 + 70 * Math.cos(endAngle);
-                  const endY = 90 + 70 * Math.sin(endAngle);
-
-                  const largeArcFlag = angle > 180 ? 1 : 0;
-
-                  const pathData = [
-                    `M 90 90`,
-                    `L ${startX} ${startY}`,
-                    `A 70 70 0 ${largeArcFlag} 1 ${endX} ${endY}`,
-                    'Z'
-                  ].join(' ');
-
-                  return (
-                    <path
-                      key={field.field}
-                      d={pathData}
-                      fill={getFieldColor(field.field)}
-                      opacity="0.8"
-                    />
-                  );
-                })}
-              </svg>
-            </div>
-            <div className="mt-4 space-y-2">
-              {fieldDistribution.map(field => (
-                <div key={field.field} className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className="w-3 h-3 rounded-full"
-                      style={{ backgroundColor: getFieldColor(field.field) }}
-                    />
-                    <span className="text-cegal-gray-300">{field.field}</span>
-                  </div>
-                  <span className="text-white font-medium">{((field.total / simulationModels.length) * 100).toFixed(0)}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
-            <h3 className="text-lg font-semibold text-white mb-4">Model Locations</h3>
-            <div className="h-[400px] rounded-lg overflow-hidden border border-cegal-gray-700">
-              <MapContainer
-                center={[60.0, 5.0]}
-                zoom={5}
-                style={{ height: '100%', width: '100%' }}
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; OpenStreetMap contributors'
-                />
-                {filteredModels.filter(m => m.coordinates).map(model => (
-                  <CircleMarker
-                    key={model.id}
-                    center={model.coordinates!}
-                    radius={8}
-                    pathOptions={{
-                      fillColor: getFieldColor(model.field),
-                      color: getFieldColor(model.field),
-                      weight: 2,
-                      opacity: 1,
-                      fillOpacity: 0.8
-                    }}
-                  >
-                    <Popup>
-                      <div className="text-sm">
-                        <div className="font-semibold">{model.field}</div>
-                        <div className="text-xs text-gray-600">{model.projectName}</div>
-                        <div className="text-xs text-gray-600">{model.models} model(s)</div>
-                      </div>
-                    </Popup>
-                  </CircleMarker>
-                ))}
-              </MapContainer>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          {fieldAverages.map((fieldData: any) => (
+            <div
+              key={fieldData.field}
+              className="bg-cegal-dark border border-cegal-gray-700 rounded-lg p-4 hover:border-cegal-primary/50 transition-colors"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-white flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: getFieldColor(fieldData.field) }}
+                  />
+                  {fieldData.field}
+                </h4>
+                <span className="text-xs text-cegal-gray-400">{fieldData.count} models</span>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-cegal-gray-400">Avg GIIP:</span>
+                  <span className="text-sm text-white font-medium">{fieldData.avgGIIP.toFixed(1)} BCF</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-cegal-gray-400">Avg STOIIP:</span>
+                  <span className="text-sm text-white font-medium">{fieldData.avgSTOIIP.toFixed(1)} MMbbl</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-cegal-gray-400">Avg Recovery:</span>
+                  <span className="text-sm text-white font-medium">{fieldData.avgRecoveryFactor.toFixed(1)}%</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-cegal-gray-400">Total Wells:</span>
+                  <span className="text-sm text-white font-medium">{fieldData.totalWells}</span>
+                </div>
+                <div className="flex justify-between items-center pt-2 border-t border-cegal-gray-700">
+                  <span className="text-xs text-cegal-gray-400">Avg Production:</span>
+                  <span className="text-sm text-emerald-400 font-medium">{fieldData.avgProductionRate.toLocaleString()} bbl/d</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          <div className="bg-cegal-dark rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <BarChart3 className="h-5 w-5 text-blue-400" />
+              <span className="text-sm text-cegal-gray-400">Model Types</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Intersect Models</span>
+                <span className="text-lg font-bold text-blue-400">{totalIntersect}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Standalone Models</span>
+                <span className="text-lg font-bold text-cyan-400">{totalStandalone}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">CMG Models</span>
+                <span className="text-lg font-bold text-pink-400">{totalCMG}</span>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <BarChart3 className="h-5 w-5 text-blue-400" />
-                <span className="text-sm text-cegal-gray-400">Intersect Models</span>
-              </div>
-              <div className="text-3xl font-bold text-white">{totalIntersect}</div>
+          <div className="bg-cegal-dark rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <HardDrive className="h-5 w-5 text-amber-400" />
+              <span className="text-sm text-cegal-gray-400">Storage</span>
             </div>
-
-            <div className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 border border-cyan-500/20 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <Database className="h-5 w-5 text-cyan-400" />
-                <span className="text-sm text-cegal-gray-400">Standalone Models</span>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Total Models</span>
+                <span className="text-lg font-bold text-white">{simulationModels.length}</span>
               </div>
-              <div className="text-3xl font-bold text-white">{totalStandalone}</div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Disk Space</span>
+                <span className="text-lg font-bold text-amber-400">{totalDiskSpace.toFixed(2)} GB</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Avg Size</span>
+                <span className="text-lg font-bold text-white">{(totalDiskSpace / simulationModels.length).toFixed(3)} GB</span>
+              </div>
             </div>
+          </div>
 
-            <div className="bg-gradient-to-br from-pink-500/10 to-pink-600/5 border border-pink-500/20 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <HardDrive className="h-5 w-5 text-pink-400" />
-                <span className="text-sm text-cegal-gray-400">CMG Models</span>
+          <div className="bg-cegal-dark rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Database className="h-5 w-5 text-emerald-400" />
+              <span className="text-sm text-cegal-gray-400">Total Reserves</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Total GIIP</span>
+                <span className="text-lg font-bold text-emerald-400">
+                  {simulationModels.reduce((sum, m) => sum + (m.giip || 0), 0).toFixed(1)} BCF
+                </span>
               </div>
-              <div className="text-3xl font-bold text-white">{totalCMG}</div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Total STOIIP</span>
+                <span className="text-lg font-bold text-blue-400">
+                  {simulationModels.reduce((sum, m) => sum + (m.stoiip || 0), 0).toFixed(1)} MMbbl
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-cegal-gray-300">Total Wells</span>
+                <span className="text-lg font-bold text-white">
+                  {simulationModels.reduce((sum, m) => sum + (m.activeWells || 0), 0)}
+                </span>
+              </div>
             </div>
           </div>
         </div>
