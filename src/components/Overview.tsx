@@ -45,7 +45,7 @@ interface DuplicateGroup {
 }
 
 const Overview: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'applications' | 'seismic' | 'wells' | 'dataManagement' | 'queryAnalytics' | 'analytics'>('applications');
+  const [activeTab, setActiveTab] = useState<'summary' | 'applications' | 'seismic' | 'wells' | 'analytics' | 'querying'>('summary');
   const [expandedApp, setExpandedApp] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({});
@@ -790,44 +790,23 @@ const Overview: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {metrics.map((metric, index) => (
-          <MetricCard key={index} {...metric} />
-        ))}
-      </div>
-
-      <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
-        <div className="p-6 border-b border-cegal-gray-700">
-          <h3 className="text-lg font-semibold text-cegal-green">Storage Usage Over Time</h3>
-          <p className="text-sm text-cegal-gray-400 mt-1">Total storage consumption (TB) across all data assets</p>
-        </div>
-        <div className="p-6">
-          <ChartCard
-            title="12-Month Storage Trend"
-            description="Storage optimization showing gradual reduction in total usage"
-            data={[
-              { name: 'Jan', value: 52.1 },
-              { name: 'Feb', value: 51.3 },
-              { name: 'Mar', value: 50.2 },
-              { name: 'Apr', value: 49.5 },
-              { name: 'May', value: 48.9 },
-              { name: 'Jun', value: 48.1 },
-              { name: 'Jul', value: 47.8 },
-              { name: 'Aug', value: 47.3 },
-              { name: 'Sep', value: 47.0 },
-              { name: 'Oct', value: 46.5 },
-              { name: 'Nov', value: 46.2 },
-              { name: 'Dec', value: 47.3 }
-            ]}
-            chartType="line"
-          />
-        </div>
-      </div>
-
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-cegal-green">Data Trends by Category</h3>
+          <h3 className="text-xl font-semibold text-cegal-green">Data Categories</h3>
           <div className="flex space-x-2 border-b border-cegal-gray-700">
+            <button
+              onClick={() => setActiveTab('summary')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'summary'
+                  ? 'text-cegal-green border-b-2 border-cegal-green'
+                  : 'text-cegal-gray-400 hover:text-white'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <Database className="h-4 w-4" />
+                <span>Summary</span>
+              </div>
+            </button>
             <button
               onClick={() => setActiveTab('applications')}
               className={`px-4 py-2 font-medium transition-colors ${
@@ -868,32 +847,6 @@ const Overview: React.FC = () => {
               </div>
             </button>
             <button
-              onClick={() => { setActiveTab('dataManagement'); setViewMode('all'); }}
-              className={`px-4 py-2 font-medium transition-colors ${
-                activeTab === 'dataManagement'
-                  ? 'text-cegal-green border-b-2 border-cegal-green'
-                  : 'text-cegal-gray-400 hover:text-white'
-              }`}
-            >
-              <div className="flex items-center space-x-2">
-                <Search className="h-4 w-4" />
-                <span>Data Management</span>
-              </div>
-            </button>
-            <button
-              onClick={() => setActiveTab('queryAnalytics')}
-              className={`px-4 py-2 font-medium transition-colors ${
-                activeTab === 'queryAnalytics'
-                  ? 'text-cegal-green border-b-2 border-cegal-green'
-                  : 'text-cegal-gray-400 hover:text-white'
-              }`}
-            >
-              <div className="flex items-center space-x-2">
-                <BarChart3 className="h-4 w-4" />
-                <span>Query & Analytics</span>
-              </div>
-            </button>
-            <button
               onClick={() => setActiveTab('analytics')}
               className={`px-4 py-2 font-medium transition-colors ${
                 activeTab === 'analytics'
@@ -903,11 +856,100 @@ const Overview: React.FC = () => {
             >
               <div className="flex items-center space-x-2">
                 <Activity className="h-4 w-4" />
-                <span>File Analytics</span>
+                <span>Analytics</span>
+              </div>
+            </button>
+            <button
+              onClick={() => setActiveTab('querying')}
+              className={`px-4 py-2 font-medium transition-colors ${
+                activeTab === 'querying'
+                  ? 'text-cegal-green border-b-2 border-cegal-green'
+                  : 'text-cegal-gray-400 hover:text-white'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <BarChart3 className="h-4 w-4" />
+                <span>Querying</span>
               </div>
             </button>
           </div>
         </div>
+
+        {activeTab === 'summary' && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {metrics.map((metric, index) => (
+                <MetricCard key={index} {...metric} />
+              ))}
+            </div>
+
+            <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
+              <div className="p-6 border-b border-cegal-gray-700">
+                <h3 className="text-lg font-semibold text-cegal-green">Storage Usage Over Time</h3>
+                <p className="text-sm text-cegal-gray-400 mt-1">Total storage consumption (TB) across all data assets</p>
+              </div>
+              <div className="p-6">
+                <ChartCard
+                  title="12-Month Storage Trend"
+                  description="Storage optimization showing gradual reduction in total usage"
+                  data={[
+                    { name: 'Jan', value: 52.1 },
+                    { name: 'Feb', value: 51.3 },
+                    { name: 'Mar', value: 50.2 },
+                    { name: 'Apr', value: 49.5 },
+                    { name: 'May', value: 48.9 },
+                    { name: 'Jun', value: 48.1 },
+                    { name: 'Jul', value: 47.8 },
+                    { name: 'Aug', value: 47.3 },
+                    { name: 'Sep', value: 47.0 },
+                    { name: 'Oct', value: 46.5 },
+                    { name: 'Nov', value: 46.2 },
+                    { name: 'Dec', value: 47.3 }
+                  ]}
+                  chartType="line"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <ChartCard
+                  title="Storage by Data Type"
+                  description="Distribution of storage across different data categories"
+                  data={[
+                    { name: 'Seismic Data', value: 23.5 },
+                    { name: 'Well Logs', value: 12.8 },
+                    { name: 'Project Files', value: 8.4 },
+                    { name: 'Interpretations', value: 2.6 }
+                  ]}
+                  chartType="pie"
+                />
+              </div>
+
+              <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
+                <div className="p-6 border-b border-cegal-gray-200">
+                  <h3 className="text-lg font-semibold text-cegal-green">Recent Activity</h3>
+                </div>
+                <div className="p-6">
+                  <div className="space-y-4">
+                    {recentActivities.map((activity, index) => {
+                      const Icon = activity.icon;
+                      return (
+                        <div key={index} className="flex items-start space-x-3">
+                          <Icon className={`h-5 w-5 mt-0.5 ${activity.color}`} />
+                          <div className="flex-1">
+                            <p className="text-sm text-white">{activity.message}</p>
+                            <p className="text-xs text-cegal-gray-500 mt-1">{activity.time}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {activeTab === 'applications' && (
           <div className="space-y-6">
@@ -915,69 +957,150 @@ const Overview: React.FC = () => {
             {renderApplicationDetails('techlog', applicationsData.techlog)}
             {renderApplicationDetails('eclipse', applicationsData.eclipse)}
             {renderApplicationDetails('resinsight', applicationsData.resinsight)}
+
+            <div className="card-cegal bg-cegal-darker border-cegal-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-cegal-green mb-4">Data Management</h3>
+              <DataQualityAnalysis
+                corruptFiles={mockFiles.filter(f => f.isCorrupt && (f.path.includes('projects') || f.path.includes('backup'))).length}
+                oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && (f.path.includes('projects') || f.path.includes('backup'))).length}
+                staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && (f.path.includes('projects') || f.path.includes('backup'))).length}
+                totalSize="3.8 TB"
+                onViewCorrupt={() => handleViewQualityCategory('corrupt')}
+                onViewOld={() => handleViewQualityCategory('old')}
+                onViewStale={() => handleViewQualityCategory('stale')}
+              />
+
+              <DataSearchFilter
+                onFilterChange={handleFilterChange}
+                availableTags={availableTags}
+              />
+
+              {selectedFiles.length > 0 && (
+                <BulkActions
+                  selectedFiles={selectedFiles}
+                  onAction={handleBulkAction}
+                  onClearSelection={() => setSelectedFiles([])}
+                />
+              )}
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+                <div className="lg:col-span-2">
+                  <FileListView
+                    files={filteredFiles.filter(f => f.path.includes('projects') || f.path.includes('backup'))}
+                    selectedFiles={selectedFiles}
+                    onFileSelect={handleFileSelect}
+                    onSelectAll={handleSelectAll}
+                  />
+                </div>
+
+                <div>
+                  <MetadataTagging
+                    selectedFiles={selectedFiles}
+                    onTagsApplied={handleTagsApplied}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
         {activeTab === 'seismic' && (
           <div className="space-y-6">
             {renderApplicationDetails('seismic', seismicData)}
+
+            <div className="card-cegal bg-cegal-darker border-cegal-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-cegal-green mb-4">Data Management</h3>
+              <DataQualityAnalysis
+                corruptFiles={mockFiles.filter(f => f.isCorrupt && f.path.includes('seismic')).length}
+                oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && f.path.includes('seismic')).length}
+                staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && f.path.includes('seismic')).length}
+                totalSize="23.5 TB"
+                onViewCorrupt={() => handleViewQualityCategory('corrupt')}
+                onViewOld={() => handleViewQualityCategory('old')}
+                onViewStale={() => handleViewQualityCategory('stale')}
+              />
+
+              <DataSearchFilter
+                onFilterChange={handleFilterChange}
+                availableTags={availableTags}
+              />
+
+              {selectedFiles.length > 0 && (
+                <BulkActions
+                  selectedFiles={selectedFiles}
+                  onAction={handleBulkAction}
+                  onClearSelection={() => setSelectedFiles([])}
+                />
+              )}
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+                <div className="lg:col-span-2">
+                  <FileListView
+                    files={filteredFiles.filter(f => f.path.includes('seismic'))}
+                    selectedFiles={selectedFiles}
+                    onFileSelect={handleFileSelect}
+                    onSelectAll={handleSelectAll}
+                  />
+                </div>
+
+                <div>
+                  <MetadataTagging
+                    selectedFiles={selectedFiles}
+                    onTagsApplied={handleTagsApplied}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
         {activeTab === 'wells' && (
           <div className="space-y-6">
             {renderApplicationDetails('wells', wellsData)}
-          </div>
-        )}
 
-        {activeTab === 'dataManagement' && (
-          <div className="space-y-6">
-            <DataQualityAnalysis
-              corruptFiles={mockFiles.filter(f => f.isCorrupt).length}
-              oldFiles={mockFiles.filter(f => f.ageCategory === 'old').length}
-              staleFiles={mockFiles.filter(f => f.ageCategory === 'stale').length}
-              totalSize="5.2 TB"
-              onViewCorrupt={() => handleViewQualityCategory('corrupt')}
-              onViewOld={() => handleViewQualityCategory('old')}
-              onViewStale={() => handleViewQualityCategory('stale')}
-            />
-
-            <DataSearchFilter
-              onFilterChange={handleFilterChange}
-              availableTags={availableTags}
-            />
-
-            {selectedFiles.length > 0 && (
-              <BulkActions
-                selectedFiles={selectedFiles}
-                onAction={handleBulkAction}
-                onClearSelection={() => setSelectedFiles([])}
+            <div className="card-cegal bg-cegal-darker border-cegal-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-cegal-green mb-4">Data Management</h3>
+              <DataQualityAnalysis
+                corruptFiles={mockFiles.filter(f => f.isCorrupt && f.path.includes('wells')).length}
+                oldFiles={mockFiles.filter(f => f.ageCategory === 'old' && f.path.includes('wells')).length}
+                staleFiles={mockFiles.filter(f => f.ageCategory === 'stale' && f.path.includes('wells')).length}
+                totalSize="12.8 TB"
+                onViewCorrupt={() => handleViewQualityCategory('corrupt')}
+                onViewOld={() => handleViewQualityCategory('old')}
+                onViewStale={() => handleViewQualityCategory('stale')}
               />
-            )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <FileListView
-                  files={filteredFiles}
-                  selectedFiles={selectedFiles}
-                  onFileSelect={handleFileSelect}
-                  onSelectAll={handleSelectAll}
-                />
-              </div>
+              <DataSearchFilter
+                onFilterChange={handleFilterChange}
+                availableTags={availableTags}
+              />
 
-              <div>
-                <MetadataTagging
+              {selectedFiles.length > 0 && (
+                <BulkActions
                   selectedFiles={selectedFiles}
-                  onTagsApplied={handleTagsApplied}
+                  onAction={handleBulkAction}
+                  onClearSelection={() => setSelectedFiles([])}
                 />
+              )}
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+                <div className="lg:col-span-2">
+                  <FileListView
+                    files={filteredFiles.filter(f => f.path.includes('wells'))}
+                    selectedFiles={selectedFiles}
+                    onFileSelect={handleFileSelect}
+                    onSelectAll={handleSelectAll}
+                  />
+                </div>
+
+                <div>
+                  <MetadataTagging
+                    selectedFiles={selectedFiles}
+                    onTagsApplied={handleTagsApplied}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {activeTab === 'queryAnalytics' && (
-          <div className="space-y-6">
-            <QueryAnalytics />
           </div>
         )}
 
@@ -986,44 +1109,12 @@ const Overview: React.FC = () => {
             <FileAnalytics analytics={fileAnalytics} />
           </div>
         )}
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <ChartCard
-            title="Storage by Data Type"
-            description="Distribution of storage across different data categories"
-            data={[
-              { name: 'Seismic Data', value: 23.5 },
-              { name: 'Well Logs', value: 12.8 },
-              { name: 'Project Files', value: 8.4 },
-              { name: 'Interpretations', value: 2.6 }
-            ]}
-            chartType="pie"
-          />
-        </div>
-
-        <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
-          <div className="p-6 border-b border-cegal-gray-200">
-            <h3 className="text-lg font-semibold text-cegal-green">Recent Activity</h3>
+        {activeTab === 'querying' && (
+          <div className="space-y-6">
+            <QueryAnalytics />
           </div>
-          <div className="p-6">
-            <div className="space-y-4">
-              {recentActivities.map((activity, index) => {
-                const Icon = activity.icon;
-                return (
-                  <div key={index} className="flex items-start space-x-3">
-                    <Icon className={`h-5 w-5 mt-0.5 ${activity.color}`} />
-                    <div className="flex-1">
-                      <p className="text-sm text-white">{activity.message}</p>
-                      <p className="text-xs text-cegal-gray-500 mt-1">{activity.time}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
