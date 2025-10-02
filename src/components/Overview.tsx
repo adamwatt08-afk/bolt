@@ -46,7 +46,7 @@ interface DuplicateGroup {
 
 const Overview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'summary' | 'applications' | 'seismic' | 'wells' | 'analytics' | 'querying'>('summary');
-  const [applicationTab, setApplicationTab] = useState<'petrel' | 'techlog' | 'eclipse' | 'resinsight'>('petrel');
+  const [applicationTab, setApplicationTab] = useState<'petrel' | 'techlog' | 'eclipse' | 'resinsight' | 'intersect' | 'kingdom' | 'geoframe'>('petrel');
   const [expandedApp, setExpandedApp] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [filters, setFilters] = useState<any>({});
@@ -1008,6 +1008,134 @@ const Overview: React.FC = () => {
         { name: 'Historical Production Review', size: '56 TB', lastModified: '2024-12-12', owner: 'Production Team' }
       ],
       duplicates: []
+    },
+    intersect: {
+      totalProjects: 4823,
+      totalSize: '712 TB',
+      activeUsers: 189,
+      duplicateGroups: 1,
+      duplicateSize: '134 TB',
+      duplicatePercentage: 18.8,
+      chartData: [
+        { name: 'Jan 2024', value: 523 },
+        { name: 'Feb 2024', value: 545 },
+        { name: 'Mar 2024', value: 567 },
+        { name: 'Apr 2024', value: 589 },
+        { name: 'May 2024', value: 612 },
+        { name: 'Jun 2024', value: 634 },
+        { name: 'Jul 2024', value: 656 },
+        { name: 'Aug 2024', value: 678 },
+        { name: 'Sep 2024', value: 691 },
+        { name: 'Oct 2024', value: 703 },
+        { name: 'Nov 2024', value: 698 },
+        { name: 'Dec 2024', value: 712 }
+      ],
+      added: [
+        { name: 'Permian Tight Oil Model', size: '89 TB', lastModified: '2024-12-17', owner: 'Reservoir Engineering' },
+        { name: 'North Sea Gas Condensate', size: '67 TB', lastModified: '2024-12-09', owner: 'Production Team' }
+      ],
+      removed: [
+        { name: 'Training Model 2021', size: '52 TB', lastModified: '2024-11-28', owner: 'Archived' }
+      ],
+      projects: [
+        { name: 'Permian Wolfcamp Model', size: '134 TB', lastModified: '2024-12-20', owner: 'Reservoir Engineering' },
+        { name: 'North Sea Ekofisk', size: '118 TB', lastModified: '2024-12-18', owner: 'Production Team' },
+        { name: 'Eagle Ford Shale', size: '102 TB', lastModified: '2024-12-15', owner: 'Reservoir Engineering' },
+        { name: 'Montney Formation Canada', size: '89 TB', lastModified: '2024-12-12', owner: 'Production Team' }
+      ],
+      duplicates: [
+        {
+          id: '1',
+          projects: ['Permian Wolfcamp Model v2', 'Permian Wolfcamp Model v2 (Backup)'],
+          size: '134 TB',
+          similarity: 98.7
+        }
+      ]
+    },
+    kingdom: {
+      totalProjects: 6234,
+      totalSize: '923 TB',
+      activeUsers: 267,
+      duplicateGroups: 2,
+      duplicateSize: '412 TB',
+      duplicatePercentage: 44.6,
+      chartData: [
+        { name: 'Jan 2024', value: 678 },
+        { name: 'Feb 2024', value: 701 },
+        { name: 'Mar 2024', value: 723 },
+        { name: 'Apr 2024', value: 745 },
+        { name: 'May 2024', value: 768 },
+        { name: 'Jun 2024', value: 790 },
+        { name: 'Jul 2024', value: 812 },
+        { name: 'Aug 2024', value: 834 },
+        { name: 'Sep 2024', value: 856 },
+        { name: 'Oct 2024', value: 878 },
+        { name: 'Nov 2024', value: 901 },
+        { name: 'Dec 2024', value: 923 }
+      ],
+      added: [
+        { name: 'West Africa 3D Interpretation', size: '156 TB', lastModified: '2024-12-16', owner: 'Exploration Team' },
+        { name: 'Gulf Coast Regional Study', size: '134 TB', lastModified: '2024-12-11', owner: 'Geophysics Team' }
+      ],
+      removed: [
+        { name: 'Old Regional 2020', size: '98 TB', lastModified: '2024-12-04', owner: 'Archived' }
+      ],
+      projects: [
+        { name: 'West Africa Margin Study', size: '234 TB', lastModified: '2024-12-20', owner: 'Exploration Team' },
+        { name: 'Gulf of Mexico Regional', size: '178 TB', lastModified: '2024-12-18', owner: 'Geophysics Team' },
+        { name: 'North Sea Interpretation', size: '156 TB', lastModified: '2024-12-16', owner: 'Exploration Team' },
+        { name: 'Southeast Asia 2D Lines', size: '145 TB', lastModified: '2024-12-13', owner: 'Geophysics Team' }
+      ],
+      duplicates: [
+        {
+          id: '1',
+          projects: ['West Africa Margin Study', 'West Africa Margin Study (Copy)'],
+          size: '234 TB',
+          similarity: 99.4
+        },
+        {
+          id: '2',
+          projects: ['Gulf of Mexico Regional v1', 'Gulf of Mexico Regional v2'],
+          size: '178 TB',
+          similarity: 96.8
+        }
+      ]
+    },
+    geoframe: {
+      totalProjects: 5412,
+      totalSize: '834 TB',
+      activeUsers: 203,
+      duplicateGroups: 0,
+      duplicateSize: '0 TB',
+      duplicatePercentage: 0,
+      chartData: [
+        { name: 'Jan 2024', value: 612 },
+        { name: 'Feb 2024', value: 634 },
+        { name: 'Mar 2024', value: 656 },
+        { name: 'Apr 2024', value: 678 },
+        { name: 'May 2024', value: 701 },
+        { name: 'Jun 2024', value: 723 },
+        { name: 'Jul 2024', value: 745 },
+        { name: 'Aug 2024', value: 768 },
+        { name: 'Sep 2024', value: 790 },
+        { name: 'Oct 2024', value: 812 },
+        { name: 'Nov 2024', value: 823 },
+        { name: 'Dec 2024', value: 834 }
+      ],
+      added: [
+        { name: 'Barents Sea Wells 2024', size: '112 TB', lastModified: '2024-12-18', owner: 'Well Analysis Team' },
+        { name: 'North Sea Stratigraphy', size: '89 TB', lastModified: '2024-12-13', owner: 'Geology Team' }
+      ],
+      removed: [
+        { name: 'Legacy Well Correlations 2019', size: '67 TB', lastModified: '2024-12-02', owner: 'Archived' }
+      ],
+      projects: [
+        { name: 'North Sea Well Correlation', size: '167 TB', lastModified: '2024-12-20', owner: 'Well Analysis Team' },
+        { name: 'Barents Regional Study', size: '145 TB', lastModified: '2024-12-17', owner: 'Geology Team' },
+        { name: 'Norwegian Continental Shelf', size: '123 TB', lastModified: '2024-12-15', owner: 'Well Analysis Team' },
+        { name: 'Brazil Pre-Salt Geology', size: '108 TB', lastModified: '2024-12-12', owner: 'Geology Team' }
+      ],
+      duplicates: []
     }
   };
 
@@ -1567,10 +1695,10 @@ const Overview: React.FC = () => {
 
         {activeTab === 'applications' && (
           <div className="space-y-6">
-            <div className="flex space-x-2 border-b border-cegal-gray-700">
+            <div className="flex space-x-2 border-b border-cegal-gray-700 overflow-x-auto">
               <button
                 onClick={() => setApplicationTab('petrel')}
-                className={`px-4 py-2 font-medium transition-colors ${
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
                   applicationTab === 'petrel'
                     ? 'text-cegal-green border-b-2 border-cegal-green'
                     : 'text-cegal-gray-400 hover:text-white'
@@ -1580,7 +1708,7 @@ const Overview: React.FC = () => {
               </button>
               <button
                 onClick={() => setApplicationTab('techlog')}
-                className={`px-4 py-2 font-medium transition-colors ${
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
                   applicationTab === 'techlog'
                     ? 'text-cegal-green border-b-2 border-cegal-green'
                     : 'text-cegal-gray-400 hover:text-white'
@@ -1590,7 +1718,7 @@ const Overview: React.FC = () => {
               </button>
               <button
                 onClick={() => setApplicationTab('eclipse')}
-                className={`px-4 py-2 font-medium transition-colors ${
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
                   applicationTab === 'eclipse'
                     ? 'text-cegal-green border-b-2 border-cegal-green'
                     : 'text-cegal-gray-400 hover:text-white'
@@ -1600,7 +1728,7 @@ const Overview: React.FC = () => {
               </button>
               <button
                 onClick={() => setApplicationTab('resinsight')}
-                className={`px-4 py-2 font-medium transition-colors ${
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
                   applicationTab === 'resinsight'
                     ? 'text-cegal-green border-b-2 border-cegal-green'
                     : 'text-cegal-gray-400 hover:text-white'
@@ -1608,12 +1736,45 @@ const Overview: React.FC = () => {
               >
                 ResInsight
               </button>
+              <button
+                onClick={() => setApplicationTab('intersect')}
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
+                  applicationTab === 'intersect'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                Intersect
+              </button>
+              <button
+                onClick={() => setApplicationTab('kingdom')}
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
+                  applicationTab === 'kingdom'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                Kingdom
+              </button>
+              <button
+                onClick={() => setApplicationTab('geoframe')}
+                className={`px-4 py-2 font-medium transition-colors whitespace-nowrap ${
+                  applicationTab === 'geoframe'
+                    ? 'text-cegal-green border-b-2 border-cegal-green'
+                    : 'text-cegal-gray-400 hover:text-white'
+                }`}
+              >
+                GeoFrame
+              </button>
             </div>
 
             {applicationTab === 'petrel' && renderApplicationDetails('petrel', applicationsData.petrel)}
             {applicationTab === 'techlog' && renderApplicationDetails('techlog', applicationsData.techlog)}
             {applicationTab === 'eclipse' && renderApplicationDetails('eclipse', applicationsData.eclipse)}
             {applicationTab === 'resinsight' && renderApplicationDetails('resinsight', applicationsData.resinsight)}
+            {applicationTab === 'intersect' && renderApplicationDetails('intersect', applicationsData.intersect)}
+            {applicationTab === 'kingdom' && renderApplicationDetails('kingdom', applicationsData.kingdom)}
+            {applicationTab === 'geoframe' && renderApplicationDetails('geoframe', applicationsData.geoframe)}
 
             <div className="card-cegal bg-cegal-darker border-cegal-gray-700 p-6">
               <h3 className="text-lg font-semibold text-cegal-green mb-4">Data Management</h3>
