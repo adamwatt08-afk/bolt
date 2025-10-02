@@ -251,6 +251,216 @@ const Overview: React.FC = () => {
       lastModified: new Date('2024-12-12'),
       createDate: new Date('2024-05-30'),
       fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'Caspian_Exploration_3D.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 445000000000000,
+      lastAccess: new Date('2024-12-11'),
+      lastModified: new Date('2024-12-09'),
+      createDate: new Date('2024-07-08'),
+      fileOwners: ['Exploration Team']
+    },
+    {
+      name: 'Norwegian_Continental_Shelf.seg',
+      path: '/seismic/active/',
+      extension: 'seg',
+      size: 501000000000000,
+      lastAccess: new Date('2024-12-19'),
+      lastModified: new Date('2024-12-16'),
+      createDate: new Date('2024-09-12'),
+      fileOwners: ['Geophysics Team', 'Acquisition Team']
+    },
+    {
+      name: 'Angola_Deep_Water.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 389000000000000,
+      lastAccess: new Date('2024-12-07'),
+      lastModified: new Date('2024-12-04'),
+      createDate: new Date('2024-06-25'),
+      fileOwners: ['Processing Team']
+    },
+    {
+      name: 'Alaska_North_Slope_Survey.sgy',
+      path: '/seismic/active/',
+      extension: 'sgy',
+      size: 412000000000000,
+      lastAccess: new Date('2024-12-13'),
+      lastModified: new Date('2024-12-11'),
+      createDate: new Date('2024-08-19'),
+      fileOwners: ['Acquisition Team']
+    },
+    {
+      name: 'Eastern_Med_Exploration.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 378000000000000,
+      lastAccess: new Date('2024-12-05'),
+      lastModified: new Date('2024-12-02'),
+      createDate: new Date('2024-05-17'),
+      fileOwners: ['Exploration Team']
+    },
+    {
+      name: 'Guyana_Offshore_Block.sgy',
+      path: '/seismic/active/',
+      extension: 'sgy',
+      size: 467000000000000,
+      lastAccess: new Date('2024-12-09'),
+      lastModified: new Date('2024-12-06'),
+      createDate: new Date('2024-07-22'),
+      fileOwners: ['Geophysics Team']
+    },
+    {
+      name: 'Bakken_Shale_3D.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 289000000000000,
+      lastAccess: new Date('2024-12-17'),
+      lastModified: new Date('2024-12-14'),
+      createDate: new Date('2024-10-03'),
+      fileOwners: ['Processing Team']
+    },
+    {
+      name: 'Eagle_Ford_Regional.seg',
+      path: '/seismic/active/',
+      extension: 'seg',
+      size: 312000000000000,
+      lastAccess: new Date('2024-12-16'),
+      lastModified: new Date('2024-12-13'),
+      createDate: new Date('2024-09-28'),
+      fileOwners: ['Acquisition Team']
+    },
+    {
+      name: 'Marcellus_Formation_Survey.segy',
+      path: '/seismic/active/',
+      extension: 'segy',
+      size: 267000000000000,
+      lastAccess: new Date('2024-12-06'),
+      lastModified: new Date('2024-12-03'),
+      createDate: new Date('2024-08-07'),
+      fileOwners: ['Exploration Team']
+    },
+    {
+      name: 'Vaca_Muerta_Argentina.sgy',
+      path: '/seismic/active/',
+      extension: 'sgy',
+      size: 334000000000000,
+      lastAccess: new Date('2024-12-04'),
+      lastModified: new Date('2024-12-01'),
+      createDate: new Date('2024-06-14'),
+      fileOwners: ['Processing Team']
+    },
+    {
+      name: 'Permian_Delaware_Basin.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 89000000000000,
+      lastAccess: new Date('2024-12-15'),
+      lastModified: new Date('2024-12-13'),
+      createDate: new Date('2024-11-02'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'Wolfcamp_Formation_Logs.dlis',
+      path: '/wells/active/',
+      extension: 'dlis',
+      size: 76000000000000,
+      lastAccess: new Date('2024-12-14'),
+      lastModified: new Date('2024-12-11'),
+      createDate: new Date('2024-10-18'),
+      fileOwners: ['Well Logging Team']
+    },
+    {
+      name: 'Spraberry_Trend_Wells.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 67000000000000,
+      lastAccess: new Date('2024-12-12'),
+      lastModified: new Date('2024-12-09'),
+      createDate: new Date('2024-09-25'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'DJ_Basin_Niobrara.dlis',
+      path: '/wells/active/',
+      extension: 'dlis',
+      size: 71000000000000,
+      lastAccess: new Date('2024-12-10'),
+      lastModified: new Date('2024-12-07'),
+      createDate: new Date('2024-08-30'),
+      fileOwners: ['Well Logging Team']
+    },
+    {
+      name: 'SCOOP_STACK_Wells.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 58000000000000,
+      lastAccess: new Date('2024-12-08'),
+      lastModified: new Date('2024-12-05'),
+      createDate: new Date('2024-07-19'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'Haynesville_Shale_Logs.dlis',
+      path: '/wells/active/',
+      extension: 'dlis',
+      size: 63000000000000,
+      lastAccess: new Date('2024-12-11'),
+      lastModified: new Date('2024-12-08'),
+      createDate: new Date('2024-10-09'),
+      fileOwners: ['Well Logging Team']
+    },
+    {
+      name: 'Utica_Shale_Suite.las',
+      path: '/wells/active/',
+      extension: 'las',
+      size: 54000000000000,
+      lastAccess: new Date('2024-12-09'),
+      lastModified: new Date('2024-12-06'),
+      createDate: new Date('2024-09-14'),
+      fileOwners: ['Petrophysics Team']
+    },
+    {
+      name: 'West_Africa_Interpretation.pet',
+      path: '/projects/active/',
+      extension: 'pet',
+      size: 289000000000000,
+      lastAccess: new Date('2024-12-19'),
+      lastModified: new Date('2024-12-17'),
+      createDate: new Date('2024-08-23'),
+      fileOwners: ['Interpretation Team']
+    },
+    {
+      name: 'North_Africa_Regional.pet',
+      path: '/projects/active/',
+      extension: 'pet',
+      size: 256000000000000,
+      lastAccess: new Date('2024-12-13'),
+      lastModified: new Date('2024-12-10'),
+      createDate: new Date('2024-07-05'),
+      fileOwners: ['Exploration Team']
+    },
+    {
+      name: 'Kashagan_Field_Model.ecl',
+      path: '/reservoir/active/',
+      extension: 'ecl',
+      size: 145000000000000,
+      lastAccess: new Date('2024-12-15'),
+      lastModified: new Date('2024-12-13'),
+      createDate: new Date('2024-09-07'),
+      fileOwners: ['Reservoir Team']
+    },
+    {
+      name: 'Tengiz_Production_Model.ecl',
+      path: '/reservoir/active/',
+      extension: 'ecl',
+      size: 132000000000000,
+      lastAccess: new Date('2024-12-12'),
+      lastModified: new Date('2024-12-09'),
+      createDate: new Date('2024-08-16'),
+      fileOwners: ['Production Team']
     }
   ];
 
@@ -307,6 +517,171 @@ const Overview: React.FC = () => {
       path: '/reservoir/legacy/',
       size: '680 GB',
       lastAccess: '2023-09-22',
+      owner: 'Reservoir Team',
+      tags: ['archived', 'deprecated'],
+      isCorrupt: false,
+      ageCategory: 'old'
+    },
+    {
+      id: '6',
+      name: 'North_Sea_Block_15-25_3D.segy',
+      path: '/seismic/active/',
+      size: '856 TB',
+      lastAccess: '2024-12-20',
+      owner: 'Geophysics Team',
+      tags: ['production', 'critical'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '7',
+      name: 'Johan_Sverdrup_4D_Baseline.sgy',
+      path: '/seismic/active/',
+      size: '712 TB',
+      lastAccess: '2024-12-18',
+      owner: 'Reservoir Team',
+      tags: ['production', '4D'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '8',
+      name: 'GOM_Deepwater_3D_Final.segy',
+      path: '/seismic/active/',
+      size: '634 TB',
+      lastAccess: '2024-12-15',
+      owner: 'Processing Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '9',
+      name: 'Brazil_PreSalt_3D.sgy',
+      path: '/seismic/active/',
+      size: '689 TB',
+      lastAccess: '2024-12-08',
+      owner: 'Geophysics Team',
+      tags: ['production', 'presalt'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '10',
+      name: 'West_Africa_PreSTM.segy',
+      path: '/seismic/active/',
+      size: '523 TB',
+      lastAccess: '2024-12-10',
+      owner: 'Processing Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '11',
+      name: 'NS_15-25-A_Complete_Suite.las',
+      path: '/wells/active/',
+      size: '123 TB',
+      lastAccess: '2024-12-20',
+      owner: 'Petrophysics Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '12',
+      name: 'Johan_Sverdrup_P1_Logs.dlis',
+      path: '/wells/active/',
+      size: '108 TB',
+      lastAccess: '2024-12-18',
+      owner: 'Well Logging Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '13',
+      name: 'GOM_Thunder_Horse_A3.las',
+      path: '/wells/active/',
+      size: '94 TB',
+      lastAccess: '2024-12-16',
+      owner: 'Petrophysics Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '14',
+      name: 'Brazil_Lula_Production_23.dlis',
+      path: '/wells/active/',
+      size: '119 TB',
+      lastAccess: '2024-12-12',
+      owner: 'Well Logging Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '15',
+      name: 'Permian_Horizontal_Well_H7.las',
+      path: '/wells/active/',
+      size: '97 TB',
+      lastAccess: '2024-12-08',
+      owner: 'Petrophysics Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '16',
+      name: 'Campos_Basin_Pre-Salt.pet',
+      path: '/projects/active/',
+      size: '234 TB',
+      lastAccess: '2024-12-08',
+      owner: 'Reservoir Team',
+      tags: ['production'],
+      isCorrupt: false,
+      ageCategory: 'recent'
+    },
+    {
+      id: '17',
+      name: 'Legacy_Processing_2020.sgy',
+      path: '/seismic/archived/',
+      size: '445 TB',
+      lastAccess: '2023-05-15',
+      owner: 'Processing Team',
+      tags: ['archived', 'ready-to-delete'],
+      isCorrupt: false,
+      ageCategory: 'old'
+    },
+    {
+      id: '18',
+      name: 'Barents_Test_Survey.segy',
+      path: '/seismic/testing/',
+      size: '289 TB',
+      lastAccess: '2024-06-20',
+      owner: 'Acquisition Team',
+      tags: ['testing', 'stale'],
+      isCorrupt: false,
+      ageCategory: 'stale'
+    },
+    {
+      id: '19',
+      name: 'Damaged_Logs_2023.las',
+      path: '/wells/problematic/',
+      size: '67 TB',
+      lastAccess: '2024-02-10',
+      owner: 'Well Logging Team',
+      tags: ['corrupt', 'review-needed'],
+      isCorrupt: true,
+      ageCategory: 'stale'
+    },
+    {
+      id: '20',
+      name: 'Old_Eclipse_Model_2019.ecl',
+      path: '/reservoir/legacy/',
+      size: '98 TB',
+      lastAccess: '2023-07-12',
       owner: 'Reservoir Team',
       tags: ['archived', 'deprecated'],
       isCorrupt: false,
@@ -394,7 +769,7 @@ const Overview: React.FC = () => {
   const metrics = [
     {
       title: 'Total Data Assets',
-      value: '127,453',
+      value: '204,589',
       change: '+18%',
       changeType: 'positive' as const,
       icon: Database,
@@ -459,6 +834,9 @@ const Overview: React.FC = () => {
 
   const applicationsData = {
     petrel: {
+      totalProjects: 8547,
+      totalSize: '1.65 PB',
+      activeUsers: 342,
       chartData: [
         { name: 'Jan 2024', value: 1247 },
         { name: 'Feb 2024', value: 1289 },
@@ -506,6 +884,9 @@ const Overview: React.FC = () => {
       ]
     },
     techlog: {
+      totalProjects: 12834,
+      totalSize: '820 TB',
+      activeUsers: 218,
       chartData: [
         { name: 'Jan 2024', value: 567 },
         { name: 'Feb 2024', value: 589 },
@@ -544,6 +925,9 @@ const Overview: React.FC = () => {
       ]
     },
     eclipse: {
+      totalProjects: 3567,
+      totalSize: '589 TB',
+      activeUsers: 156,
       chartData: [
         { name: 'Jan 2024', value: 423 },
         { name: 'Feb 2024', value: 438 },
@@ -581,6 +965,9 @@ const Overview: React.FC = () => {
       ]
     },
     resinsight: {
+      totalProjects: 2189,
+      totalSize: '364 TB',
+      activeUsers: 94,
       chartData: [
         { name: 'Jan 2024', value: 234 },
         { name: 'Feb 2024', value: 245 },
@@ -612,6 +999,9 @@ const Overview: React.FC = () => {
   };
 
   const seismicData = {
+    totalFiles: 47823,
+    totalSize: '2.30 PB',
+    activeUsers: 487,
     chartData: [
       { name: 'Jan 2024', value: 2567 },
       { name: 'Feb 2024', value: 2534 },
@@ -660,6 +1050,9 @@ const Overview: React.FC = () => {
   };
 
   const wellsData = {
+    totalFiles: 89456,
+    totalSize: '1.07 PB',
+    activeUsers: 623,
     chartData: [
       { name: 'Jan 2024', value: 1134 },
       { name: 'Feb 2024', value: 1123 },
@@ -741,16 +1134,38 @@ const Overview: React.FC = () => {
       <div className="space-y-6">
         <div className="card-cegal bg-cegal-darker border-cegal-gray-700">
           <div className="p-4 border-b border-cegal-gray-700 flex items-center justify-between">
-            <div>
-              <h4 className="text-md font-semibold text-white">{title}</h4>
-              <p className="text-xs text-cegal-gray-400 mt-1">{description}</p>
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-md font-semibold text-white">{title}</h4>
+                  <p className="text-xs text-cegal-gray-400 mt-1">{description}</p>
+                </div>
+                <button
+                  onClick={() => toggleExpanded(appName)}
+                  className="p-2 text-cegal-gray-400 hover:text-cegal-green transition-colors"
+                >
+                  {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                </button>
+              </div>
+              {(appData.totalProjects !== undefined || appData.totalFiles !== undefined) && (
+                <div className="grid grid-cols-3 gap-4 mt-4">
+                  <div className="bg-cegal-gray-800 rounded-lg p-3">
+                    <p className="text-xs text-cegal-gray-400">{appData.totalProjects !== undefined ? 'Total Projects' : 'Total Files'}</p>
+                    <p className="text-lg font-semibold text-cegal-green mt-1">
+                      {appData.totalProjects !== undefined ? appData.totalProjects.toLocaleString() : appData.totalFiles.toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="bg-cegal-gray-800 rounded-lg p-3">
+                    <p className="text-xs text-cegal-gray-400">Total Size</p>
+                    <p className="text-lg font-semibold text-cegal-green mt-1">{appData.totalSize}</p>
+                  </div>
+                  <div className="bg-cegal-gray-800 rounded-lg p-3">
+                    <p className="text-xs text-cegal-gray-400">Active Users</p>
+                    <p className="text-lg font-semibold text-cegal-green mt-1">{appData.activeUsers}</p>
+                  </div>
+                </div>
+              )}
             </div>
-            <button
-              onClick={() => toggleExpanded(appName)}
-              className="p-2 text-cegal-gray-400 hover:text-cegal-green transition-colors"
-            >
-              {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-            </button>
           </div>
           <div className="p-4">
             <ChartCard
@@ -1017,10 +1432,10 @@ const Overview: React.FC = () => {
                   title="Storage by Data Type"
                   description="Distribution of storage across different data categories"
                   data={[
-                    { name: 'Seismic Data', value: 2298 },
-                    { name: 'Well Logs', value: 1067 },
-                    { name: 'Project Files', value: 1645 },
-                    { name: 'Interpretations', value: 364 }
+                    { name: 'Seismic Data', value: 47823 },
+                    { name: 'Well Logs', value: 89456 },
+                    { name: 'Project Files', value: 65121 },
+                    { name: 'Interpretations', value: 2189 }
                   ]}
                   chartType="pie"
                 />
