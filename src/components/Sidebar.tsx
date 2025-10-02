@@ -14,7 +14,7 @@ import {
   ChevronRight,
   Droplets,
   HardDrive,
-  Wrench
+  Rocket
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     {
       title: 'Command Centre',
       items: [
-        { id: 'setup', label: 'Setup', icon: Wrench },
+        { id: 'setup', label: 'Setup', icon: Rocket },
       ]
     },
     {
