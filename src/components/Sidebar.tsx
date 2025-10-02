@@ -77,10 +77,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
             <div className="w-10 h-10 bg-gradient-cegal rounded-lg flex items-center justify-center shadow-cegal">
               <span className="text-white font-bold text-lg">C</span>
             </div>
-            <div>
-              <p className="text-base font-semibold text-cegal-green">Cenova</p>
-              <p className="text-xs text-cegal-gray-400">by Cegal</p>
-            </div>
           </div>
         </div>
 
