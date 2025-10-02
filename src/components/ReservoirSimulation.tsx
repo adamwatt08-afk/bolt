@@ -807,6 +807,50 @@ const ReservoirSimulation: React.FC = () => {
         </div>
       </div>
 
+      <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-5">
+        <h3 className="text-lg font-semibold text-white mb-4">Model Locations</h3>
+        <div className="h-[400px] rounded-lg overflow-hidden border border-cegal-gray-700">
+          <MapContainer
+            center={[60.0, 5.0]}
+            zoom={5}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; OpenStreetMap contributors'
+            />
+            {filteredModels.filter(m => m.coordinates).map(model => (
+              <CircleMarker
+                key={model.id}
+                center={model.coordinates!}
+                radius={selectedModelId === model.id ? 12 : 8}
+                pathOptions={{
+                  fillColor: getFieldColor(model.field),
+                  color: getFieldColor(model.field),
+                  weight: selectedModelId === model.id ? 3 : 2,
+                  opacity: 1,
+                  fillOpacity: selectedModelId === model.id ? 1 : 0.8
+                }}
+              >
+                <Popup>
+                  <div className="text-sm">
+                    <div className="font-semibold">{model.field}</div>
+                    <div className="text-xs text-gray-600">{model.projectName}</div>
+                    <div className="text-xs text-gray-600">{model.models} model(s)</div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      STOIIP: {model.stoiip?.toFixed(1)} MMbbl
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      Recovery: {model.recoveryFactor?.toFixed(1)}%
+                    </div>
+                  </div>
+                </Popup>
+              </CircleMarker>
+            ))}
+          </MapContainer>
+        </div>
+      </div>
+
       <div className="bg-cegal-darker border border-cegal-gray-700 rounded-lg p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
