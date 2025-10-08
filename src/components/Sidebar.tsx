@@ -14,7 +14,8 @@ import {
   ChevronRight,
   Droplets,
   HardDrive,
-  Rocket
+  Rocket,
+  Map
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -70,6 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       title: 'Settings',
       items: [
         { id: 'configuration', label: 'Configuration', icon: Settings },
+        { id: 'sitemap', label: 'Site Map', icon: Map },
       ]
     }
   ];

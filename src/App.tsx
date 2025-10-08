@@ -12,6 +12,7 @@ import ProjectData from './components/ProjectData';
 import ReservoirSimulation from './components/ReservoirSimulation';
 import StorageManagement from './components/StorageManagement';
 import Setup from './components/Setup';
+import SiteMap from './components/SiteMap';
 
 function App() {
   const [activeTab, setActiveTab] = useState('setup');
@@ -56,6 +57,8 @@ function App() {
         return <ReservoirSimulation />;
       case 'storage':
         return <StorageManagement />;
+      case 'sitemap':
+        return <SiteMap />;
       default:
         return <Overview />;
     }
