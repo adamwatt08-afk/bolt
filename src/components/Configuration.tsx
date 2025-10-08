@@ -15,8 +15,10 @@ import {
   EyeOff,
   Key,
   Calendar,
-  Package
+  Package,
+  Tag
 } from 'lucide-react';
+import TagManagement from './TagManagement';
 
 const Configuration: React.FC = () => {
   const [activeTab, setActiveTab] = useState('general');
@@ -66,6 +68,7 @@ const Configuration: React.FC = () => {
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'users', label: 'Users', icon: Users },
     { id: 'licenses', label: 'Licenses', icon: Key },
+    { id: 'tags', label: 'Tags', icon: Tag },
   ];
 
   const handleSave = () => {
@@ -701,6 +704,8 @@ const Configuration: React.FC = () => {
         return renderUserSettings();
       case 'licenses':
         return renderLicenseSettings();
+      case 'tags':
+        return <TagManagement />;
       default:
         return renderGeneralSettings();
     }
