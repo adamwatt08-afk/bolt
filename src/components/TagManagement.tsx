@@ -55,6 +55,7 @@ const TagManagement: React.FC = () => {
   const [isMerging, setIsMerging] = useState(false);
   const [mergeTree, setMergeTree] = useState<MergeNode | null>(null);
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  const [primaryTagId, setPrimaryTagId] = useState<string | null>(null);
 
   const categories = ['Location', 'Data Type', 'Application', 'Status'];
   const colorOptions = [
@@ -131,8 +132,35 @@ const TagManagement: React.FC = () => {
       }))
     };
 
+    setPrimaryTagId(primaryTag.id);
     setMergeTree(tree);
     setIsMerging(true);
+    setExpandedNodes(new Set([tree.id]));
+  };
+
+  const handleChangePrimaryTag = (newPrimaryId: string) => {
+    if (!mergeTree) return;
+
+    const selectedTagItems = tags.filter(tag => selectedTags.includes(tag.id));
+    const newPrimaryTag = selectedTagItems.find(tag => tag.id === newPrimaryId);
+
+    if (!newPrimaryTag) return;
+
+    const tree: MergeNode = {
+      id: newPrimaryTag.id,
+      name: newPrimaryTag.name,
+      color: newPrimaryTag.color,
+      count: selectedTagItems.reduce((sum, tag) => sum + tag.count, 0),
+      children: selectedTagItems.filter(tag => tag.id !== newPrimaryId).map(tag => ({
+        id: tag.id,
+        name: tag.name,
+        color: tag.color,
+        count: tag.count
+      }))
+    };
+
+    setPrimaryTagId(newPrimaryId);
+    setMergeTree(tree);
     setExpandedNodes(new Set([tree.id]));
   };
 
@@ -162,6 +190,7 @@ const TagManagement: React.FC = () => {
   const handleCancelMerge = () => {
     setIsMerging(false);
     setMergeTree(null);
+    setPrimaryTagId(null);
   };
 
   const toggleNodeExpansion = (nodeId: string) => {
@@ -226,9 +255,12 @@ const TagManagement: React.FC = () => {
           {level === 0 ? (
             <GitMerge className="h-5 w-5 text-cegal-green" />
           ) : (
-            <div className="flex items-center text-cegal-gray-500 text-sm">
-              <span>will merge into primary</span>
-            </div>
+            <button
+              onClick={() => handleChangePrimaryTag(node.id)}
+              className="px-3 py-1.5 bg-cegal-gray-700 hover:bg-cegal-gray-600 border border-cegal-gray-600 rounded text-xs text-white transition-colors"
+            >
+              Make Primary
+            </button>
           )}
         </div>
 
