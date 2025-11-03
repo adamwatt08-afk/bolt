@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import Home from './components/Home';
 import Overview from './components/Overview';
 import DataManagement from './components/DataManagement';
 import DataInsights from './components/DataInsights';
@@ -15,10 +16,12 @@ import Setup from './components/Setup';
 import SiteMap from './components/SiteMap';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('setup');
+  const [activeTab, setActiveTab] = useState('home');
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'home':
+        return <Home onNavigate={setActiveTab} />;
       case 'setup':
         return <Setup />;
       case 'overview':

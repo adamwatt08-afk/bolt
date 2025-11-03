@@ -15,7 +15,8 @@ import {
   Droplets,
   HardDrive,
   Rocket,
-  Map
+  Map,
+  Home
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -33,6 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     {
       title: 'Command Centre',
       items: [
+        { id: 'home', label: 'Home', icon: Home },
         { id: 'setup', label: 'Setup', icon: Rocket },
       ]
     },
