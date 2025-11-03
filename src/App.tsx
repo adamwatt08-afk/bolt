@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
+import CenovaCommand from './components/CenovaCommand';
 import Overview from './components/Overview';
 import DataManagement from './components/DataManagement';
 import DataInsights from './components/DataInsights';
@@ -22,10 +23,10 @@ function App() {
     switch (activeTab) {
       case 'home':
         return <Home onNavigate={setActiveTab} />;
+      case 'cenova-command':
       case 'setup':
-        return <Setup />;
       case 'overview':
-        return <Overview />;
+        return <CenovaCommand />;
       case 'management':
         return <DataManagement />;
       case 'insights':

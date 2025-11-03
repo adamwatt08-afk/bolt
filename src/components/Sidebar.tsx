@@ -16,7 +16,8 @@ import {
   HardDrive,
   Rocket,
   Map,
-  Home
+  Home,
+  Command
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -35,13 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       title: 'Command Centre',
       items: [
         { id: 'home', label: 'Home', icon: Home },
-        { id: 'setup', label: 'Setup', icon: Rocket },
-      ]
-    },
-    {
-      title: 'Core',
-      items: [
-        { id: 'overview', label: 'Overview', icon: BarChart3 },
+        { id: 'cenova-command', label: 'Cenova Command', icon: Command },
       ]
     },
     {

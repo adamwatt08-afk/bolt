@@ -18,7 +18,8 @@ import {
   BarChart3,
   Zap,
   Shield,
-  TrendingUp
+  TrendingUp,
+  Command
 } from 'lucide-react';
 
 interface ModuleCardProps {
@@ -28,9 +29,10 @@ interface ModuleCardProps {
   features: string[];
   color: string;
   onClick: () => void;
+  subItems?: string[];
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({ icon: Icon, title, description, features, color, onClick }) => {
+const ModuleCard: React.FC<ModuleCardProps> = ({ icon: Icon, title, description, features, color, onClick, subItems }) => {
   return (
     <div
       onClick={onClick}
@@ -69,12 +71,13 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const modules = [
     {
-      id: 'overview',
-      icon: BarChart3,
-      title: 'Overview Dashboard',
-      description: 'Your command center for monitoring system health, data quality, and performance metrics across all modules.',
-      features: ['Real-time system metrics', 'Application analytics', 'Data quality insights'],
-      color: 'bg-blue-500/20 text-blue-400'
+      id: 'cenova-command',
+      icon: Command,
+      title: 'Cenova Command',
+      description: 'Your command center for system setup, monitoring, and comprehensive overview of all platform operations.',
+      features: ['Setup wizard', 'System overview', 'Real-time metrics'],
+      color: 'bg-blue-500/20 text-blue-400',
+      subItems: ['setup', 'overview']
     },
     {
       id: 'seismic',
@@ -253,7 +256,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               description={module.description}
               features={module.features}
               color={module.color}
-              onClick={() => onNavigate(module.id)}
+              onClick={() => {
+                if (module.id === 'cenova-command') {
+                  onNavigate('overview');
+                } else {
+                  onNavigate(module.id);
+                }
+              }}
+              subItems={module.subItems}
             />
           ))}
         </div>
