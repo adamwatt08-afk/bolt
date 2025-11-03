@@ -187,6 +187,32 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </p>
       </div>
 
+      <div className="card-cegal bg-gradient-to-r from-cegal-primary/10 to-cegal-green/10 border-cegal-primary/30 p-8">
+        <div className="flex items-start justify-between">
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-white">Getting Started</h3>
+            <p className="text-cegal-gray-400 max-w-2xl">
+              New to the platform? Start with the Setup wizard to configure your system, or jump straight into the Overview dashboard to see your data at a glance.
+            </p>
+            <div className="flex space-x-3 pt-4">
+              <button
+                onClick={() => onNavigate('setup')}
+                className="px-6 py-3 bg-gradient-cegal text-white rounded-lg font-medium hover:shadow-cegal transition-all"
+              >
+                Start Setup
+              </button>
+              <button
+                onClick={() => onNavigate('overview')}
+                className="px-6 py-3 bg-cegal-gray-800 text-white rounded-lg font-medium hover:bg-cegal-gray-700 transition-colors"
+              >
+                Go to Dashboard
+              </button>
+            </div>
+          </div>
+          <TrendingUp className="h-24 w-24 text-cegal-green/20" />
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
@@ -230,32 +256,6 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               onClick={() => onNavigate(module.id)}
             />
           ))}
-        </div>
-      </div>
-
-      <div className="card-cegal bg-gradient-to-r from-cegal-primary/10 to-cegal-green/10 border-cegal-primary/30 p-8">
-        <div className="flex items-start justify-between">
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-white">Getting Started</h3>
-            <p className="text-cegal-gray-400 max-w-2xl">
-              New to the platform? Start with the Setup wizard to configure your system, or jump straight into the Overview dashboard to see your data at a glance.
-            </p>
-            <div className="flex space-x-3 pt-4">
-              <button
-                onClick={() => onNavigate('setup')}
-                className="px-6 py-3 bg-gradient-cegal text-white rounded-lg font-medium hover:shadow-cegal transition-all"
-              >
-                Start Setup
-              </button>
-              <button
-                onClick={() => onNavigate('overview')}
-                className="px-6 py-3 bg-cegal-gray-800 text-white rounded-lg font-medium hover:bg-cegal-gray-700 transition-colors"
-              >
-                Go to Dashboard
-              </button>
-            </div>
-          </div>
-          <TrendingUp className="h-24 w-24 text-cegal-green/20" />
         </div>
       </div>
 
