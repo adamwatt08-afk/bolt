@@ -82,7 +82,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     {
       id: 'seismic',
       icon: Layers,
-      title: 'Seismic Data',
+      title: 'Cenova Seismic',
       description: 'Manage and visualize seismic surveys with advanced search, duplicate detection, and geographic mapping.',
       features: ['File management', 'Map visualization', 'Duplicate analysis'],
       color: 'bg-cegal-green/20 text-cegal-green'
@@ -183,7 +183,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <HomeIcon className="h-10 w-10 text-white" />
         </div>
         <h1 className="text-4xl font-bold text-white">
-          Welcome to <span className="text-cegal-green">Cegal</span> Data Platform
+          Welcome to <span className="text-cegal-green">Cenova</span>
         </h1>
         <p className="text-lg text-cegal-gray-400 max-w-3xl mx-auto">
           Your comprehensive solution for managing, analyzing, and optimizing subsurface data across the entire oil and gas workflow.
